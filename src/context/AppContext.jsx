@@ -52,45 +52,25 @@ export const AppProvider = ({ children }) => {
   // Rental Kit (Cart) Items
   const [kit, setKit] = useState(() => {
     const saved = localStorage.getItem('bagless_kit');
-    return saved
-      ? JSON.parse(saved)
-      : [
-          { ...PRODUCTS[0], selectedSize: 'M', rentalDays: 7 },
-          { ...PRODUCTS[1], selectedSize: 'M', rentalDays: 7 }
-        ];
+    return saved ? JSON.parse(saved) : [];
   });
 
   // Active Trip Rentals (items delivered at hotel)
   const [activeRentals, setActiveRentals] = useState(() => {
     const saved = localStorage.getItem('bagless_active_rentals');
-    return saved
-      ? JSON.parse(saved)
-      : [
-          { ...PRODUCTS[0], selectedSize: 'M', rentalDays: 7, returnDate: '2026-08-22', status: 'rented' },
-          { ...PRODUCTS[4], selectedSize: '39', rentalDays: 7, returnDate: '2026-08-22', status: 'rented' }
-        ];
+    return saved ? JSON.parse(saved) : [];
   });
 
   // Purchased items
   const [boughtItems, setBoughtItems] = useState(() => {
     const saved = localStorage.getItem('bagless_bought_items');
-    return saved
-      ? JSON.parse(saved)
-      : [
-          {
-            ...PRODUCTS[2],
-            selectedSize: 'M',
-            purchaseDate: '2026-06-10',
-            shippingAddress: 'Avenida da Liberdade 120, Lisboa',
-            amountPaid: 34
-          }
-        ];
+    return saved ? JSON.parse(saved) : [];
   });
 
   // Favorites
   const [favorites, setFavorites] = useState(() => {
     const saved = localStorage.getItem('bagless_favorites');
-    return saved ? JSON.parse(saved) : ['prod-jacquemus-shirt', 'prod-zimmermann-dress'];
+    return saved ? JSON.parse(saved) : [];
   });
 
   // Selected item modal & Buy item modal states
