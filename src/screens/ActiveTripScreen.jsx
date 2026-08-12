@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Calendar, MapPin, Truck, CheckCircle2, Sparkles, XCircle, AlertTriangle, Trash2, Luggage, Compass } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BuyItemModal, ScheduleReturnModal, useToast } from '../components';
-import { FALLBACK_IMAGE } from '../mockData/catalogGenerator';
 
 export const ActiveTripScreen = () => {
   const { activeRentals, removeFromActiveRentals, currentTrip, setBuyingProduct, boughtItems, setCurrentScreen, cancelTrip } = useApp();

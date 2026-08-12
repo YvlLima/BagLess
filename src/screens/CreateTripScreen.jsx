@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MapPin, Calendar, Hotel, Sparkles, ArrowRight, Check, Search, Globe, Loader2, AlertCircle } from 'lucide-react';
+import { MapPin, Calendar, Hotel, ArrowRight, Check, Search, Globe, Loader2, AlertCircle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { POPULAR_DESTINATIONS, fetchGlobalGeoLocation, fetchLiveWeather } from '../mockData/destinations';
 import { WeatherBadge } from '../components';
