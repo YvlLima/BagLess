@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Compass, X, ArrowDown, SlidersHorizontal, Award } from 'lucide-react';
+import { Search, Compass, X, ArrowDown, SlidersHorizontal, Award, RotateCcw, Check } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { PRODUCTS } from '../mockData/products';
 import { BRANDS } from '../mockData/brands';

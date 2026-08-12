@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
-import { Trash2, ArrowRight, Truck, CreditCard, Sparkles, Shield } from 'lucide-react';
+import { Trash2, ArrowRight, Truck, CreditCard, Sparkles, Shield, Info, ChevronRight, Check } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useCurrency } from '../context/CurrencyContext';
-import { OrderReceiptModal, EcoImpactCard, useToast, ProductImagePlaceholder } from '../components';
+import { usePayment } from '../context/PaymentContext';
+import { OrderReceiptModal, EcoImpactCard, useToast, ProductImagePlaceholder, PaymentMethodsModal } from '../components';
+import { calculateDeposit, calculateInsurancePerDay, calculateTotalRetailValue } from '../utils/pricing';
 
 export const CartScreen = () => {
   const { kit, removeFromKit, currentTrip, calculateTripDays, confirmTripCheckout, setCurrentScreen, autoCurateKitForDestination } = useApp();
   const { formatPrice } = useCurrency();
   const { showToast } = useToast();
+  const { getSelectedMethod } = usePayment();
+
   const [isProcessing, setIsProcessing] = useState(false);
   const [completedOrder, setCompletedOrder] = useState(null);
   const [hasCareProtection, setHasCareProtection] = useState(true);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+
+  const selectedPayment = getSelectedMethod();
 
   const days = calculateTripDays();
   const subtotalRental = kit.reduce((acc, item) => acc + item.rentalPricePerDay * days, 0);
-  const deposit = kit.length > 0 ? 30 : 0; // Refundable deposit
-  const careProtectionFee = hasCareProtection ? 4 * days : 0;
+  const totalRetail = calculateTotalRetailValue(kit);
+  const deposit = calculateDeposit(kit);
+  const careProtectionPerDay = calculateInsurancePerDay(kit);
+  const careProtectionFee = hasCareProtection ? careProtectionPerDay * days : 0;
   const deliveryFee = 0; // Free hotel delivery promo
   const total = subtotalRental + deposit + careProtectionFee + deliveryFee;
 
@@ -26,10 +35,11 @@ export const CartScreen = () => {
       const newOrder = {
         id: `BGL-${Math.floor(10000 + Math.random() * 90000)}`,
         total,
+        paymentMethod: selectedPayment ? `${selectedPayment.label} (${selectedPayment.maskedDetail})` : 'Cartão de Crédito',
         date: new Date().toISOString().split('T')[0]
       };
       setCompletedOrder(newOrder);
-      showToast('Pagamento confirmado com sucesso!');
+      showToast(`Pagamento de ${formatPrice(total)} confirmado via ${selectedPayment?.label || 'Cartão'}!`);
     }, 1500);
   };
 
@@ -161,10 +171,10 @@ export const CartScreen = () => {
                 />
                 <div style={{ fontSize: '12px' }}>
                   <strong style={{ color: 'var(--primary-terracotta)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <Shield size={14} /> Proteção Total Bagless Care (+{formatPrice(4)}/dia)
+                    <Shield size={14} /> Proteção Total Bagless Care (+{formatPrice(careProtectionPerDay)}/dia)
                   </strong>
                   <div style={{ color: 'var(--text-muted)', marginTop: '2px' }}>
-                    Cobre nódoas acidentais, rasgões ou fechos sem franquia. Viaja sem preocupações!
+                    1,2%/dia do valor total a retalho ({formatPrice(totalRetail)}). Cobre nódoas acidentais, rasgões ou fechos sem franquia.
                   </div>
                 </div>
               </label>
@@ -177,13 +187,20 @@ export const CartScreen = () => {
               </div>
               {hasCareProtection && (
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>Proteção Bagless Care:</span>
+                  <span style={{ color: 'var(--text-muted)' }}>Proteção Bagless Care ({days}d):</span>
                   <span style={{ fontWeight: 600 }}>{formatPrice(careProtectionFee)}</span>
                 </div>
               )}
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--text-muted)' }}>Caução Reembolsável:</span>
-                <span style={{ fontWeight: 600 }}>{formatPrice(deposit)}</span>
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    Caução Reembolsável <Info size={13} color="var(--primary-terracotta)" title="Caução calculada com base no valor total de compra das peças no kit (8% com mínimo de €30 e teto máximo de €1500)." />
+                  </span>
+                  <span style={{ fontWeight: 600 }}>{formatPrice(deposit)}</span>
+                </div>
+                <div style={{ fontSize: '11px', color: 'var(--text-light)', marginTop: '2px', textAlign: 'right' }}>
+                  Calculada com base no valor das peças ({formatPrice(totalRetail)} retail)
+                </div>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: 'var(--text-muted)' }}>Entrega e Recolha no Hotel:</span>
@@ -196,13 +213,44 @@ export const CartScreen = () => {
               </div>
             </div>
 
-            {/* Payment Simulation Form */}
-            <div style={{ background: 'var(--bg-subtle)', borderRadius: 'var(--radius-sm)', padding: '12px', marginBottom: '20px', fontSize: '12px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700, marginBottom: '6px' }}>
-                <CreditCard size={14} color="var(--primary-terracotta)" /> Stripe Express Checkout (Simulação)
+            {/* Dynamic Payment Method Selector Card */}
+            <div
+              onClick={() => setIsPaymentModalOpen(true)}
+              style={{
+                background: 'var(--bg-subtle)',
+                border: '1px solid var(--border-medium)',
+                borderRadius: 'var(--radius-md)',
+                padding: '14px',
+                marginBottom: '20px',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>
+                  Método de Pagamento
+                </span>
+                <span style={{ fontSize: '12px', color: 'var(--primary-terracotta)', fontWeight: 700 }}>
+                  Alterar / Adicionar
+                </span>
               </div>
-              <div style={{ color: 'var(--text-muted)' }}>
-                Cartão de Crédito ••••• 4242 (Pagamento seguro)
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ width: '32px', height: '22px', background: '#FFFFFF', borderRadius: '4px', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 800, color: 'var(--primary-terracotta)' }}>
+                  {selectedPayment?.brand === 'visa' ? 'VISA' : selectedPayment?.brand === 'mastercard' ? 'MC' : selectedPayment?.brand === 'mbway' ? 'MB' : selectedPayment?.brand === 'paypal' ? 'PP' : '💳'}
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: '13px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    {selectedPayment ? selectedPayment.label : 'Cartão de Crédito'}
+                    {selectedPayment?.isDefault && (
+                      <span style={{ fontSize: '9px', background: 'var(--accent-olive-light)', color: 'var(--accent-olive)', padding: '1px 6px', borderRadius: 'var(--radius-full)' }}>Predefinido</span>
+                    )}
+                  </div>
+                  <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                    {selectedPayment ? selectedPayment.maskedDetail : '•••• 4242'}
+                  </div>
+                </div>
+                <ChevronRight size={16} color="var(--text-light)" />
               </div>
             </div>
 
@@ -222,6 +270,12 @@ export const CartScreen = () => {
           </div>
         </div>
       </div>
+
+      {/* Payment Methods Modal */}
+      <PaymentMethodsModal
+        isOpen={isPaymentModalOpen}
+        onClose={() => setIsPaymentModalOpen(false)}
+      />
 
       {/* Order Receipt Modal */}
       <OrderReceiptModal

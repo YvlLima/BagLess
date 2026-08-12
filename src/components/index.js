@@ -9,6 +9,7 @@ export { ProductImagePlaceholder } from './ProductImagePlaceholder';
 export { ProductCard } from './ProductCard';
 export { ProductModal } from './ProductModal';
 export { ReviewCard } from './ReviewCard';
+export { PaymentMethodsModal } from './PaymentMethodsModal';
 export { ScheduleReturnModal } from './ScheduleReturnModal';
 export { SizeFitGuideModal } from './SizeFitGuideModal';
 export { StyleQuizModal } from './StyleQuizModal';

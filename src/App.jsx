@@ -3,6 +3,7 @@ import { AppProvider, useApp } from './context/AppContext';
 import { WishlistProvider, useWishlist } from './context/WishlistContext';
 import { CurrencyProvider } from './context/CurrencyContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { PaymentProvider } from './context/PaymentContext';
 import { Navbar, ToastProvider, ProductModal } from './components';
 import {
   CatalogScreen,
@@ -13,7 +14,8 @@ import {
   BrandsScreen,
   OnboardingScreen,
   WishlistScreen,
-  TripHistoryScreen
+  TripHistoryScreen,
+  PaymentMethodsScreen
 } from './screens';
 import { Compass, ShoppingBag, Luggage, User, Heart } from 'lucide-react';
 
@@ -41,6 +43,8 @@ const MainContent = () => {
         return <ActiveTripScreen />;
       case 'profile':
         return <ProfileHistoryScreen />;
+      case 'payment-methods':
+        return <PaymentMethodsScreen />;
       default:
         return <CatalogScreen />;
     }
@@ -105,7 +109,7 @@ const MainContent = () => {
               <span>Ativa</span>
             </button>
 
-            <button className={`mobile-nav-item ${currentScreen === 'profile' ? 'active' : ''}`} onClick={() => setCurrentScreen('profile')}>
+            <button className={`mobile-nav-item ${currentScreen === 'profile' || currentScreen === 'payment-methods' ? 'active' : ''}`} onClick={() => setCurrentScreen('profile')}>
               <User size={20} />
               <span>Perfil</span>
             </button>
@@ -133,23 +137,25 @@ export function App() {
       <AppProvider>
         <WishlistProvider>
           <CurrencyProvider>
-            <ToastProvider>
-              <div className="app-container">
-                {/* Top bar indicating current device view and switch option */}
-                <div className="mode-banner">
-                  <div>
-                    🧳 <strong>Bagless App</strong> — Viaja leve. Vive com estilo. (Travel Light. Dress Right.)
+            <PaymentProvider>
+              <ToastProvider>
+                <div className="app-container">
+                  {/* Top bar indicating current device view and switch option */}
+                  <div className="mode-banner">
+                    <div>
+                      🧳 <strong>Bagless App</strong> — Viaja leve. Vive com estilo. (Travel Light. Dress Right.)
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <span style={{ fontSize: '11px', color: '#E6DEC9' }}>
+                        Ambiente: Web & Mobile Shared Architecture
+                      </span>
+                    </div>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <span style={{ fontSize: '11px', color: '#E6DEC9' }}>
-                      Ambiente: Web & Mobile Shared Architecture
-                    </span>
-                  </div>
-                </div>
 
-                <MainContent />
-              </div>
-            </ToastProvider>
+                  <MainContent />
+                </div>
+              </ToastProvider>
+            </PaymentProvider>
           </CurrencyProvider>
         </WishlistProvider>
       </AppProvider>

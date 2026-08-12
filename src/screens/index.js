@@ -7,5 +7,6 @@ export { BrandsScreen } from './BrandsScreen';
 export { OnboardingScreen } from './OnboardingScreen';
 export { WishlistScreen } from './WishlistScreen';
 export { TripHistoryScreen } from './TripHistoryScreen';
+export { PaymentMethodsScreen } from './PaymentMethodsScreen';
 
 

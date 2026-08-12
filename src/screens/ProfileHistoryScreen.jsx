@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { Heart, ShoppingBag, Sparkles, ArrowRight, Share2 } from 'lucide-react';
+import { Heart, ShoppingBag, Sparkles, ArrowRight, Share2, CreditCard, ShieldCheck, ChevronRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { usePayment } from '../context/PaymentContext';
 import { PRODUCTS } from '../mockData/products';
-import { StyleQuizModal, useToast, ProductImagePlaceholder } from '../components';
+import { StyleQuizModal, useToast, ProductImagePlaceholder, PaymentMethodsModal } from '../components';
 
 export const ProfileHistoryScreen = () => {
   const { user, favorites, addToKit, setCurrentScreen } = useApp();
+  const { paymentMethods, getSelectedMethod } = usePayment();
   const { showToast } = useToast();
   const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
+  const defaultMethod = getSelectedMethod();
   const favoriteProducts = PRODUCTS.filter((p) => favorites.includes(p.id));
 
   const pastTrips = [
@@ -44,7 +48,7 @@ export const ProfileHistoryScreen = () => {
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto' }}>
       {/* Profile Header Card */}
-      <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-lg)', padding: '28px', marginBottom: '28px', boxShadow: 'var(--shadow-sm)' }}>
+      <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-lg)', padding: '28px', marginBottom: '24px', boxShadow: 'var(--shadow-sm)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px' }}>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
             <div style={{ width: '72px', height: '72px', borderRadius: '50%', background: 'var(--primary-terracotta-light)', color: 'var(--primary-terracotta)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '24px' }}>
@@ -78,6 +82,43 @@ export const ProfileHistoryScreen = () => {
               Roupa: <strong>{user.sizes.top}</strong> • Calçado: <strong>{user.sizes.shoes}</strong>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Payment Methods Banner Card */}
+      <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-lg)', padding: '20px', marginBottom: '28px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'var(--primary-terracotta-light)', color: 'var(--primary-terracotta)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <CreditCard size={24} />
+          </div>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              Métodos de Pagamento Guardados ({paymentMethods.length})
+              <span style={{ fontSize: '11px', background: 'var(--bg-subtle)', color: 'var(--text-muted)', border: '1px solid var(--border-medium)', padding: '2px 8px', borderRadius: 'var(--radius-full)' }}>
+                <ShieldCheck size={12} style={{ display: 'inline', marginRight: '3px' }} /> Encriptação SSL
+              </span>
+            </div>
+            <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '2px' }}>
+              Predefinido: <strong>{defaultMethod?.label || 'Cartão'}</strong> ({defaultMethod?.maskedDetail || '•••• 4242'})
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button
+            className="btn-secondary"
+            onClick={() => setIsPaymentModalOpen(true)}
+            style={{ fontSize: '13px', padding: '8px 14px' }}
+          >
+            Gerir Rápidamente
+          </button>
+          <button
+            className="btn-primary"
+            onClick={() => setCurrentScreen('payment-methods')}
+            style={{ fontSize: '13px', padding: '8px 16px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+          >
+            Abrir Cofre <ChevronRight size={16} />
+          </button>
         </div>
       </div>
 
@@ -163,8 +204,9 @@ export const ProfileHistoryScreen = () => {
         </div>
       </div>
 
-      {/* Style Quiz Modal */}
+      {/* Modals */}
       <StyleQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
+      <PaymentMethodsModal isOpen={isPaymentModalOpen} onClose={() => setIsPaymentModalOpen(false)} />
     </div>
   );
 };
