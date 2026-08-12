@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Heart, ShoppingBag, Sparkles, ArrowRight, Share2 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { PRODUCTS } from '../mockData/products';
-import { StyleQuizModal, useToast } from '../components';
+import { StyleQuizModal, useToast, ProductImagePlaceholder } from '../components';
 
 export const ProfileHistoryScreen = () => {
   const { user, favorites, addToKit, setCurrentScreen } = useApp();
@@ -111,7 +111,9 @@ export const ProfileHistoryScreen = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '16px' }}>
             {favoriteProducts.map((prod) => (
               <div key={prod.id} style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', padding: '14px', display: 'flex', gap: '12px', alignItems: 'center' }}>
-                <img src={prod.image} alt={prod.name} style={{ width: '60px', height: '70px', objectFit: 'cover', borderRadius: 'var(--radius-sm)' }} />
+                <div style={{ width: '60px', height: '70px', borderRadius: 'var(--radius-sm)', overflow: 'hidden', position: 'relative', flexShrink: 0 }}>
+                  <ProductImagePlaceholder name={prod.name} brandName={prod.brandName} style={{ padding: '4px' }} />
+                </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)' }}>{prod.brandName}</div>
                   <div style={{ fontSize: '13px', fontWeight: 700 }}>{prod.name}</div>

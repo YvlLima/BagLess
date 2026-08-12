@@ -15,7 +15,7 @@ import {
   WishlistScreen,
   TripHistoryScreen
 } from './screens';
-import { Compass, ShoppingBag, Luggage, User, Award, Heart } from 'lucide-react';
+import { Compass, ShoppingBag, Luggage, User, Heart } from 'lucide-react';
 
 const MainContent = () => {
   const { currentScreen, setCurrentScreen, isMobileFrame, kit } = useApp();
