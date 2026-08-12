@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppProvider, useApp } from './context/AppContext';
+import { WishlistProvider, useWishlist } from './context/WishlistContext';
 import { CurrencyProvider } from './context/CurrencyContext';
 import { Navbar, ToastProvider, ProductModal } from './components';
 import {
@@ -9,12 +10,14 @@ import {
   ActiveTripScreen,
   ProfileHistoryScreen,
   BrandsScreen,
-  OnboardingScreen
+  OnboardingScreen,
+  WishlistScreen
 } from './screens';
-import { Compass, ShoppingBag, Luggage, User, Award } from 'lucide-react';
+import { Compass, ShoppingBag, Luggage, User, Award, Heart } from 'lucide-react';
 
 const MainContent = () => {
   const { currentScreen, setCurrentScreen, isMobileFrame, kit } = useApp();
+  const { wishlist } = useWishlist();
 
   const renderScreen = () => {
     switch (currentScreen) {
@@ -24,6 +27,8 @@ const MainContent = () => {
         return <CreateTripScreen />;
       case 'catalog':
         return <CatalogScreen />;
+      case 'wishlist':
+        return <WishlistScreen />;
       case 'brands':
         return <BrandsScreen />;
       case 'cart':
@@ -67,9 +72,16 @@ const MainContent = () => {
               <span>Explorar</span>
             </button>
 
-            <button className={`mobile-nav-item ${currentScreen === 'brands' ? 'active' : ''}`} onClick={() => setCurrentScreen('brands')}>
-              <Award size={20} />
-              <span>Marcas</span>
+            <button className={`mobile-nav-item ${currentScreen === 'wishlist' ? 'active' : ''}`} onClick={() => setCurrentScreen('wishlist')}>
+              <div style={{ position: 'relative' }}>
+                <Heart size={20} />
+                {wishlist.length > 0 && (
+                  <span style={{ position: 'absolute', top: '-4px', right: '-8px', background: 'var(--primary-terracotta)', color: '#FFF', fontSize: '9px', fontWeight: 800, width: '15px', height: '15px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {wishlist.length}
+                  </span>
+                )}
+              </div>
+              <span>Favoritos</span>
             </button>
 
             <button className={`mobile-nav-item ${currentScreen === 'cart' ? 'active' : ''}`} onClick={() => setCurrentScreen('cart')}>
@@ -114,25 +126,27 @@ const MainContent = () => {
 export function App() {
   return (
     <AppProvider>
-      <CurrencyProvider>
-        <ToastProvider>
-          <div className="app-container">
-            {/* Top bar indicating current device view and switch option */}
-            <div className="mode-banner">
-              <div>
-                🧳 <strong>Bagless App</strong> — Viaja leve. Vive com estilo. (Travel Light. Dress Right.)
+      <WishlistProvider>
+        <CurrencyProvider>
+          <ToastProvider>
+            <div className="app-container">
+              {/* Top bar indicating current device view and switch option */}
+              <div className="mode-banner">
+                <div>
+                  🧳 <strong>Bagless App</strong> — Viaja leve. Vive com estilo. (Travel Light. Dress Right.)
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ fontSize: '11px', color: '#E6DEC9' }}>
+                    Ambiente: Web & Mobile Shared Architecture
+                  </span>
+                </div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <span style={{ fontSize: '11px', color: '#E6DEC9' }}>
-                  Ambiente: Web & Mobile Shared Architecture
-                </span>
-              </div>
-            </div>
 
-            <MainContent />
-          </div>
-        </ToastProvider>
-      </CurrencyProvider>
+              <MainContent />
+            </div>
+          </ToastProvider>
+        </CurrencyProvider>
+      </WishlistProvider>
     </AppProvider>
   );
 }

@@ -1,13 +1,15 @@
 import React from 'react';
 import { Heart, Plus, Check, ShieldCheck } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { useWishlist } from '../context/WishlistContext';
 import { useCurrency } from '../context/CurrencyContext';
 
 export const ProductCard = ({ product }) => {
-  const { kit, addToKit, favorites, toggleFavorite, setSelectedProduct } = useApp();
+  const { kit, addToKit, setSelectedProduct } = useApp();
+  const { toggleWishlist, isInWishlist } = useWishlist();
   const { formatPrice } = useCurrency();
 
-  const isFavorite = favorites.includes(product.id);
+  const isFavorite = isInWishlist(product.id);
   const isInKit = kit.some((item) => item.id === product.id);
 
   const getTierClass = (tier) => {
@@ -53,7 +55,7 @@ export const ProductCard = ({ product }) => {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            toggleFavorite(product.id);
+            toggleWishlist(product);
           }}
           style={{
             position: 'absolute',

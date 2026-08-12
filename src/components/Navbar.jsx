@@ -1,11 +1,13 @@
 import React from 'react';
-import { ShoppingBag, Luggage, User, Compass, Smartphone, Monitor, Award } from 'lucide-react';
+import { ShoppingBag, Luggage, User, Compass, Smartphone, Monitor, Award, Heart } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { useWishlist } from '../context/WishlistContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { BrandLogo } from './BrandLogo';
 
 export const Navbar = () => {
   const { currentScreen, setCurrentScreen, kit, activeRentals, isMobileFrame, setIsMobileFrame } = useApp();
+  const { wishlist } = useWishlist();
   const { currency, setCurrency, RATES } = useCurrency();
 
   return (
@@ -39,6 +41,30 @@ export const Navbar = () => {
           >
             <Award size={16} style={{ display: 'inline', verticalAlign: '-2px', marginRight: '4px' }} />
             Marcas
+          </button>
+
+          <button
+            className={`nav-link ${currentScreen === 'wishlist' ? 'active' : ''}`}
+            onClick={() => setCurrentScreen('wishlist')}
+            style={{ position: 'relative' }}
+          >
+            <Heart size={16} style={{ display: 'inline', verticalAlign: '-2px', marginRight: '4px' }} />
+            Favoritos
+            {wishlist.length > 0 && (
+              <span
+                style={{
+                  background: 'var(--primary-terracotta)',
+                  color: '#FFFFFF',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  padding: '2px 7px',
+                  borderRadius: '10px',
+                  marginLeft: '6px'
+                }}
+              >
+                {wishlist.length}
+              </span>
+            )}
           </button>
 
           <button
