@@ -50,16 +50,16 @@ export const CartScreen = () => {
 
   if (kit.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '64px 16px', maxWidth: '540px', margin: '0 auto' }}>
-        <div style={{ width: '72px', height: '72px', borderRadius: '50%', background: 'var(--primary-terracotta-light)', color: 'var(--primary-terracotta)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto' }}>
+      <div className="empty-state-wrapper max-w-lg mx-auto">
+        <div className="empty-state-icon-bg">
           <Sparkles size={36} />
         </div>
-        <h2 className="heading-lg" style={{ marginBottom: '8px' }}>O teu Kit de Viagem está Vazio</h2>
-        <p className="subheading" style={{ marginBottom: '24px' }}>
+        <h2 className="heading-lg mb-2">O teu Kit de Viagem está Vazio</h2>
+        <p className="subheading mb-6">
           Podes explorar o catálogo manualmente ou usar o assistente AI para montar automaticamente um Kit completo para {currentTrip.destination.name}.
         </p>
 
-        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+        <div className="flex gap-3 justify-center">
           <button className="btn-secondary" onClick={() => setCurrentScreen('catalog')}>
             Explorar Catálogo
           </button>
@@ -78,8 +78,8 @@ export const CartScreen = () => {
   }
 
   return (
-    <div style={{ maxWidth: '950px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '24px' }}>
+    <div className="max-w-4xl mx-auto">
+      <div className="mb-6">
         <span className="slogan-tag">Resumo do Pedido & Impacto Ecológico</span>
         <h1 className="heading-xl">O teu Kit de Viagem Bagless</h1>
         <p className="subheading">
@@ -87,44 +87,36 @@ export const CartScreen = () => {
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '32px' }}>
+      <div className="cart-grid-layout">
         {/* Kit Items List & Eco Card */}
         <div>
-          <h3 className="heading-md" style={{ marginBottom: '16px' }}>Peças Incluídas</h3>
+          <h3 className="heading-md mb-4">Peças Incluídas</h3>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
+          <div className="flex-col gap-4 mb-6">
             {kit.map((item, idx) => (
               <div
                 key={`${item.id}-${idx}`}
-                style={{
-                  display: 'flex',
-                  gap: '16px',
-                  background: 'var(--bg-surface)',
-                  border: '1px solid var(--border-light)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: '16px',
-                  alignItems: 'center'
-                }}
+                className="cart-item-card"
               >
-                <div style={{ width: '80px', height: '90px', borderRadius: 'var(--radius-sm)', overflow: 'hidden', position: 'relative', flexShrink: 0 }}>
+                <div className="cart-item-thumb">
                   <ProductImagePlaceholder name={item.name} brandName={item.brandName} style={{ padding: '6px' }} />
                 </div>
 
-                <div style={{ flex: 1 }}>
-                  <span className={`badge-tier tier-${item.tier}`} style={{ fontSize: '10px', padding: '2px 8px', marginBottom: '4px', display: 'inline-block' }}>
+                <div className="flex-1">
+                  <span className={`badge-tier tier-${item.tier} text-xs py-0.5 px-2 mb-1 inline-block`}>
                     {item.brandName}
                   </span>
-                  <h4 style={{ fontSize: '15px', fontWeight: 700 }}>{item.name}</h4>
-                  <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                  <h4 className="text-base font-bold">{item.name}</h4>
+                  <div className="text-xs text-muted mt-0.5">
                     Tamanho: <strong>{item.selectedSize}</strong> • {formatPrice(item.rentalPricePerDay)} / dia
                   </div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-light)', marginTop: '4px' }}>
+                  <div className="text-xs text-light mt-1">
                     Preço de Compra pós-viagem: {formatPrice(item.fullPurchasePrice)}
                   </div>
                 </div>
 
-                <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--primary-terracotta)' }}>
+                <div className="text-right">
+                  <div className="text-base font-extrabold text-terracotta">
                     {formatPrice(item.rentalPricePerDay * days)}
                   </div>
                   <button
@@ -132,7 +124,7 @@ export const CartScreen = () => {
                       removeFromKit(item.id, item.selectedSize);
                       showToast('Peça removida do kit.');
                     }}
-                    style={{ color: '#D9534F', fontSize: '12px', marginTop: '8px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                    className="text-xs mt-2 inline-flex items-center gap-1 text-red-600"
                   >
                     <Trash2 size={14} /> Remover
                   </button>
@@ -145,11 +137,11 @@ export const CartScreen = () => {
           <EcoImpactCard itemsCount={kit.length} days={days} />
 
           {/* Delivery Details */}
-          <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', padding: '20px', marginTop: '20px' }}>
-            <h4 style={{ fontSize: '14px', fontWeight: 700, marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="bg-surface border border-light rounded-md p-5 mt-5">
+            <h4 className="text-sm font-bold mb-2 flex items-center gap-2">
               <Truck size={16} color="var(--primary-terracotta)" /> Morada de Entrega no Destino
             </h4>
-            <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+            <p className="text-xs text-muted">
               {currentTrip.deliveryAddress}
             </p>
           </div>
@@ -157,96 +149,88 @@ export const CartScreen = () => {
 
         {/* Cost Summary & Checkout */}
         <div>
-          <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-medium)', borderRadius: 'var(--radius-lg)', padding: '24px', position: 'sticky', top: '90px', boxShadow: 'var(--shadow-md)' }}>
-            <h3 className="heading-md" style={{ marginBottom: '16px' }}>Resumo de Custos</h3>
+          <div className="cart-summary-sticky">
+            <h3 className="heading-md mb-4">Resumo de Custos</h3>
 
             {/* Bagless Care Damage Protection Toggle */}
-            <div style={{ background: 'var(--primary-terracotta-light)', border: '1px solid #F6D6CB', borderRadius: 'var(--radius-md)', padding: '14px', marginBottom: '20px' }}>
-              <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer' }}>
+            <div className="care-protection-box">
+              <label className="flex items-start gap-2.5 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={hasCareProtection}
                   onChange={(e) => setHasCareProtection(e.target.checked)}
-                  style={{ accentColor: 'var(--primary-terracotta)', width: '18px', height: '18px', marginTop: '2px' }}
+                  className="mt-0.5"
                 />
-                <div style={{ fontSize: '12px' }}>
-                  <strong style={{ color: 'var(--primary-terracotta)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <div className="text-xs">
+                  <strong className="text-terracotta flex items-center gap-1">
                     <Shield size={14} /> Proteção Total Bagless Care (+{formatPrice(careProtectionPerDay)}/dia)
                   </strong>
-                  <div style={{ color: 'var(--text-muted)', marginTop: '2px' }}>
+                  <div className="text-muted mt-0.5">
                     1,2%/dia do valor total a retalho ({formatPrice(totalRetail)}). Cobre nódoas acidentais, rasgões ou fechos sem franquia.
                   </div>
                 </div>
               </label>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px', marginBottom: '20px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--text-muted)' }}>Aluguer ({days} dias, {kit.length} peças):</span>
-                <span style={{ fontWeight: 600 }}>{formatPrice(subtotalRental)}</span>
+            <div className="flex-col gap-3 text-sm mb-5">
+              <div className="flex justify-between">
+                <span className="text-muted">Aluguer ({days} dias, {kit.length} peças):</span>
+                <span className="font-semibold">{formatPrice(subtotalRental)}</span>
               </div>
               {hasCareProtection && (
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>Proteção Bagless Care ({days}d):</span>
-                  <span style={{ fontWeight: 600 }}>{formatPrice(careProtectionFee)}</span>
+                <div className="flex justify-between">
+                  <span className="text-muted">Proteção Bagless Care ({days}d):</span>
+                  <span className="font-semibold">{formatPrice(careProtectionFee)}</span>
                 </div>
               )}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <div className="flex justify-between">
+                  <span className="text-muted flex items-center gap-1">
                     Caução Reembolsável <Info size={13} color="var(--primary-terracotta)" title="Caução calculada com base no valor total de compra das peças no kit (8% com mínimo de €30 e teto máximo de €1500)." />
                   </span>
-                  <span style={{ fontWeight: 600 }}>{formatPrice(deposit)}</span>
+                  <span className="font-semibold">{formatPrice(deposit)}</span>
                 </div>
-                <div style={{ fontSize: '11px', color: 'var(--text-light)', marginTop: '2px', textAlign: 'right' }}>
+                <div className="text-xs text-light mt-0.5 text-right">
                   Calculada com base no valor das peças ({formatPrice(totalRetail)} retail)
                 </div>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--text-muted)' }}>Entrega e Recolha no Hotel:</span>
-                <span style={{ fontWeight: 600, color: 'var(--accent-olive)' }}>GRÁTIS (Promo)</span>
+              <div className="flex justify-between">
+                <span className="text-muted">Entrega e Recolha no Hotel:</span>
+                <span className="font-semibold text-olive">GRÁTIS (Promo)</span>
               </div>
 
-              <div style={{ borderTop: '1px dashed var(--border-medium)', paddingTop: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <span style={{ fontWeight: 800, fontSize: '16px' }}>Total do Checkout:</span>
-                <span style={{ fontSize: '24px', fontWeight: 800, color: 'var(--primary-terracotta)' }}>{formatPrice(total)}</span>
+              <div className="border-t border-dashed border-medium pt-3 flex justify-between items-baseline">
+                <span className="font-extrabold text-base">Total do Checkout:</span>
+                <span className="text-2xl font-extrabold text-terracotta">{formatPrice(total)}</span>
               </div>
             </div>
 
             {/* Dynamic Payment Method Selector Card */}
             <div
               onClick={() => setIsPaymentModalOpen(true)}
-              style={{
-                background: 'var(--bg-subtle)',
-                border: '1px solid var(--border-medium)',
-                borderRadius: 'var(--radius-md)',
-                padding: '14px',
-                marginBottom: '20px',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease'
-              }}
+              className="payment-selector-card"
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>
+              <div className="flex justify-between items-center mb-1.5">
+                <span className="text-xs font-bold uppercase tracking-wider text-muted">
                   Método de Pagamento
                 </span>
-                <span style={{ fontSize: '12px', color: 'var(--primary-terracotta)', fontWeight: 700 }}>
+                <span className="text-xs text-terracotta font-bold">
                   Alterar / Adicionar
                 </span>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <div style={{ width: '32px', height: '22px', background: '#FFFFFF', borderRadius: '4px', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 800, color: 'var(--primary-terracotta)' }}>
+              <div className="flex items-center gap-2.5">
+                <div className="payment-brand-badge">
                   {selectedPayment?.brand === 'visa' ? 'VISA' : selectedPayment?.brand === 'mastercard' ? 'MC' : selectedPayment?.brand === 'mbway' ? 'MB' : selectedPayment?.brand === 'paypal' ? 'PP' : '💳'}
                 </div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: '13px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <div className="flex-1">
+                  <div className="text-xs font-bold flex items-center gap-1.5">
                     {selectedPayment ? selectedPayment.label : 'Cartão de Crédito'}
                     {selectedPayment?.isDefault && (
-                      <span style={{ fontSize: '9px', background: 'var(--accent-olive-light)', color: 'var(--accent-olive)', padding: '1px 6px', borderRadius: 'var(--radius-full)' }}>Predefinido</span>
+                      <span className="text-xs bg-olive-light text-olive py-0.5 px-1.5 rounded-full">Predefinido</span>
                     )}
                   </div>
-                  <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                  <div className="text-xs text-muted">
                     {selectedPayment ? selectedPayment.maskedDetail : '•••• 4242'}
                   </div>
                 </div>
@@ -257,14 +241,13 @@ export const CartScreen = () => {
             <button
               onClick={handleCheckout}
               disabled={isProcessing}
-              className="btn-primary"
-              style={{ width: '100%', padding: '14px', fontSize: '15px' }}
+              className="btn-primary btn-full-width text-base"
             >
               {isProcessing ? 'A processar reservas...' : 'Confirmar e Pagar ' + formatPrice(total)}
               {!isProcessing && <ArrowRight size={18} />}
             </button>
 
-            <div style={{ fontSize: '11px', color: 'var(--text-light)', textAlign: 'center', marginTop: '12px' }}>
+            <div className="text-xs text-light text-center mt-3">
               Ao confirmar, aceitas os Termos de Devolução da Bagless.
             </div>
           </div>

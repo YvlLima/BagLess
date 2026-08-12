@@ -26,7 +26,7 @@ export const Navbar = () => {
             className={`nav-link ${currentScreen === 'create-trip' ? 'active' : ''}`}
             onClick={() => setCurrentScreen('create-trip')}
           >
-            <Compass size={16} style={{ display: 'inline', verticalAlign: '-2px', marginRight: '4px' }} />
+            <Compass size={16} className="nav-icon-inline" />
             Planear Viagem
           </button>
 
@@ -41,29 +41,18 @@ export const Navbar = () => {
             className={`nav-link ${currentScreen === 'brands' ? 'active' : ''}`}
             onClick={() => setCurrentScreen('brands')}
           >
-            <Award size={16} style={{ display: 'inline', verticalAlign: '-2px', marginRight: '4px' }} />
+            <Award size={16} className="nav-icon-inline" />
             Marcas
           </button>
 
           <button
             className={`nav-link ${currentScreen === 'wishlist' ? 'active' : ''}`}
             onClick={() => setCurrentScreen('wishlist')}
-            style={{ position: 'relative' }}
           >
-            <Heart size={16} style={{ display: 'inline', verticalAlign: '-2px', marginRight: '4px' }} />
+            <Heart size={16} className="nav-icon-inline" />
             Favoritos
             {wishlist.length > 0 && (
-              <span
-                style={{
-                  background: 'var(--primary-terracotta)',
-                  color: '#FFFFFF',
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  padding: '2px 7px',
-                  borderRadius: '10px',
-                  marginLeft: '6px'
-                }}
-              >
+              <span className="nav-badge-pill">
                 {wishlist.length}
               </span>
             )}
@@ -72,22 +61,11 @@ export const Navbar = () => {
           <button
             className={`nav-link ${currentScreen === 'cart' ? 'active' : ''}`}
             onClick={() => setCurrentScreen('cart')}
-            style={{ position: 'relative' }}
           >
-            <ShoppingBag size={16} style={{ display: 'inline', verticalAlign: '-2px', marginRight: '4px' }} />
+            <ShoppingBag size={16} className="nav-icon-inline" />
             Kit de Viagem
             {kit.length > 0 && (
-              <span
-                style={{
-                  background: 'var(--primary-terracotta)',
-                  color: '#FFFFFF',
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  padding: '2px 7px',
-                  borderRadius: '10px',
-                  marginLeft: '6px'
-                }}
-              >
+              <span className="nav-badge-pill">
                 {kit.length}
               </span>
             )}
@@ -97,20 +75,10 @@ export const Navbar = () => {
             className={`nav-link ${currentScreen === 'active-trip' ? 'active' : ''}`}
             onClick={() => setCurrentScreen('active-trip')}
           >
-            <Luggage size={16} style={{ display: 'inline', verticalAlign: '-2px', marginRight: '4px' }} />
+            <Luggage size={16} className="nav-icon-inline" />
             Viagem Ativa
             {activeRentals.length > 0 && (
-              <span
-                style={{
-                  background: 'var(--accent-olive)',
-                  color: '#FFFFFF',
-                  fontSize: '10px',
-                  fontWeight: 700,
-                  padding: '2px 6px',
-                  borderRadius: '10px',
-                  marginLeft: '6px'
-                }}
-              >
+              <span className="nav-badge-pill-olive">
                 {activeRentals.length} peças
               </span>
             )}
@@ -120,30 +88,18 @@ export const Navbar = () => {
             className={`nav-link ${currentScreen === 'profile' ? 'active' : ''}`}
             onClick={() => setCurrentScreen('profile')}
           >
-            <User size={16} style={{ display: 'inline', verticalAlign: '-2px', marginRight: '4px' }} />
+            <User size={16} className="nav-icon-inline" />
             Perfil
           </button>
         </nav>
       )}
 
       {/* Currency Switcher, Dark Mode Toggle & Viewport Mode Toggle */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <div className="nav-controls">
         {/* Dark / Light Mode Toggle */}
         <button
           onClick={toggleTheme}
-          style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-medium)',
-            borderRadius: 'var(--radius-full)',
-            padding: '7px 12px',
-            fontSize: '12px',
-            fontWeight: 700,
-            color: 'var(--text-main)',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            cursor: 'pointer'
-          }}
+          className="theme-toggle-btn"
           title={theme === 'dark' ? 'Mudar para Modo Claro' : 'Mudar para Modo Escuro'}
         >
           {theme === 'dark' ? <Sun size={15} color="#F59E0B" /> : <Moon size={15} color="var(--primary-terracotta)" />}
@@ -153,16 +109,7 @@ export const Navbar = () => {
         <select
           value={currency}
           onChange={(e) => setCurrency(e.target.value)}
-          style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-medium)',
-            borderRadius: 'var(--radius-full)',
-            padding: '6px 12px',
-            fontSize: '12px',
-            fontWeight: 700,
-            color: 'var(--text-main)',
-            cursor: 'pointer'
-          }}
+          className="currency-select"
         >
           {Object.keys(RATES).map((code) => (
             <option key={code} value={code}>
@@ -173,14 +120,7 @@ export const Navbar = () => {
 
         <button
           onClick={() => setIsMobileFrame(!isMobileFrame)}
-          className="mode-toggle-btn"
-          style={{
-            background: isMobileFrame ? 'var(--text-main)' : 'var(--bg-subtle)',
-            color: isMobileFrame ? '#FFFFFF' : 'var(--text-main)',
-            border: '1px solid var(--border-medium)',
-            padding: '8px 14px',
-            fontSize: '12px'
-          }}
+          className={`mode-toggle-btn viewport-toggle-btn ${isMobileFrame ? 'mobile' : 'web'}`}
         >
           {isMobileFrame ? <Monitor size={14} /> : <Smartphone size={14} />}
           {isMobileFrame ? 'Ver em Web Browser' : 'Ver em App Mobile'}

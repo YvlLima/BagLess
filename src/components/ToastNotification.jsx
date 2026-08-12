@@ -22,35 +22,11 @@ export const ToastProvider = ({ children }) => {
     <ToastContext.Provider value={{ showToast }}>
       {children}
       {/* Toast Render Container */}
-      <div
-        style={{
-          position: 'fixed',
-          bottom: '24px',
-          right: '24px',
-          zIndex: 999,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-          pointerEvents: 'none'
-        }}
-      >
+      <div className="toast-container">
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            style={{
-              pointerEvents: 'auto',
-              background: 'var(--text-main)',
-              color: 'var(--bg-main)',
-              padding: '12px 18px',
-              borderRadius: 'var(--radius-full)',
-              boxShadow: 'var(--shadow-lg)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              fontSize: '13px',
-              fontWeight: 600,
-              animation: 'fadeInUp 0.25s ease-out'
-            }}
+            className="toast-item"
           >
             {toast.type === 'wishlist' ? (
               <Heart size={16} color="var(--primary-terracotta)" fill="var(--primary-terracotta)" />
@@ -60,7 +36,7 @@ export const ToastProvider = ({ children }) => {
             <span>{toast.message}</span>
             <button
               onClick={() => removeToast(toast.id)}
-              style={{ color: 'var(--text-light)', marginLeft: '4px' }}
+              className="toast-close-btn"
             >
               <X size={14} />
             </button>

@@ -34,53 +34,42 @@ export const HygieneCertificateModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '540px' }}>
+      <div className="modal-content max-w-lg" onClick={(e) => e.stopPropagation()}>
         <button
           onClick={onClose}
-          style={{
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            background: 'var(--bg-subtle)',
-            borderRadius: '50%',
-            width: '32px',
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
+          className="modal-close-btn"
         >
           <X size={18} />
         </button>
 
-        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-          <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'var(--accent-olive-light)', color: 'var(--accent-olive)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px auto' }}>
+        <div className="text-center mb-6">
+          <div className="modal-success-icon-bg">
             <Award size={32} />
           </div>
           <span className="slogan-tag">Garantia Oficial Bagless Clean Standard</span>
-          <h2 className="heading-md" style={{ fontSize: '22px', margin: '6px 0 4px 0' }}>
+          <h2 className="heading-md my-1 text-xl">
             Certificado de Higienização de Padrão Hospitalar
           </h2>
-          <p className="subheading" style={{ fontSize: '13px' }}>
+          <p className="subheading text-xs">
             Todas as peças chegam ao teu hotel 100% impecáveis, desinfetadas e prontas a vestir.
           </p>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '24px' }}>
+        <div className="step-list-container">
           {steps.map((s, idx) => (
-            <div key={idx} style={{ display: 'flex', gap: '14px', background: 'var(--bg-subtle)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', padding: '14px', alignItems: 'flex-start' }}>
-              <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div key={idx} className="step-card-item">
+              <div className="step-card-icon-box">
                 {s.icon}
               </div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: '14px', color: 'var(--text-main)' }}>{s.title}</div>
-                <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>{s.desc}</div>
+                <div className="font-bold text-sm text-main">{s.title}</div>
+                <div className="text-xs text-muted mt-0.5">{s.desc}</div>
               </div>
             </div>
           ))}
         </div>
 
-        <button className="btn-primary" onClick={onClose} style={{ width: '100%', padding: '12px' }}>
+        <button className="btn-primary btn-full-width" onClick={onClose}>
           Entendido • Garantia de Qualidade
         </button>
       </div>

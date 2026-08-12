@@ -23,68 +23,57 @@ export const BuyItemModal = () => {
 
   return (
     <div className="modal-overlay" onClick={() => setBuyingProduct(null)}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '520px' }}>
+      <div className="modal-content max-w-lg" onClick={(e) => e.stopPropagation()}>
         {/* Close button */}
         <button
           onClick={() => setBuyingProduct(null)}
-          style={{
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            background: 'var(--bg-subtle)',
-            borderRadius: '50%',
-            width: '36px',
-            height: '36px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
+          className="modal-close-btn"
         >
           <X size={18} />
         </button>
 
         {isSuccess ? (
-          <div style={{ textAlign: 'center', padding: '32px 16px' }}>
-            <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'var(--accent-olive-light)', color: 'var(--accent-olive)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px auto' }}>
+          <div className="modal-success-box">
+            <div className="modal-success-icon-bg">
               <CheckCircle size={36} />
             </div>
-            <h3 style={{ fontSize: '22px', fontWeight: 800, marginBottom: '8px' }}>Peça Comprada com Sucesso!</h3>
-            <p style={{ fontSize: '14px', color: 'var(--text-muted)' }}>
+            <h3 className="text-xl font-bold mb-2">Peça Comprada com Sucesso!</h3>
+            <p className="text-sm text-muted">
               Esta peça é agora oficialmente tua! Não precisas de devolvê-la na mala.
             </p>
           </div>
         ) : (
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary-terracotta)', fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', marginBottom: '8px' }}>
+            <div className="modal-title-sparkle">
               <Sparkles size={16} /> Opção Bagless Keep & Own
             </div>
 
-            <h2 style={{ fontSize: '22px', fontWeight: 800, marginBottom: '8px' }}>
+            <h2 className="text-xl font-bold mb-2">
               Comprar "{buyingProduct.name}"
             </h2>
-            <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '20px' }}>
+            <p className="text-sm text-muted mb-5">
               Adoraste a peça durante a tua viagem? Paga apenas a diferença entre o valor de aluguer já pago e o preço original.
             </p>
 
             {/* Price breakdown card */}
-            <div style={{ background: 'var(--bg-subtle)', borderRadius: 'var(--radius-md)', padding: '16px', marginBottom: '20px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', marginBottom: '8px' }}>
+            <div className="modal-breakdown-card">
+              <div className="modal-breakdown-row">
                 <span>Preço original de loja:</span>
-                <span style={{ fontWeight: 600 }}>{buyingProduct.fullPurchasePrice}€</span>
+                <span className="font-semibold">{buyingProduct.fullPurchasePrice}€</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', color: 'var(--accent-olive)', marginBottom: '12px' }}>
+              <div className="modal-breakdown-row-olive">
                 <span>Aluguer já pago ({buyingProduct.rentalDays} dias):</span>
-                <span style={{ fontWeight: 700 }}>- {rentalPaid}€</span>
+                <span className="font-bold">- {rentalPaid}€</span>
               </div>
-              <div style={{ borderTop: '1px dashed var(--border-medium)', paddingTop: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontWeight: 800, fontSize: '15px' }}>Valor a pagar agora:</span>
-                <span style={{ fontSize: '22px', fontWeight: 800, color: 'var(--primary-terracotta)' }}>{priceDiff}€</span>
+              <div className="modal-breakdown-footer">
+                <span className="font-bold text-base">Valor a pagar agora:</span>
+                <span className="text-2xl font-bold text-terracotta">{priceDiff}€</span>
               </div>
             </div>
 
             {/* Destination / Home Shipping Address */}
             <div className="form-group">
-              <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <label className="form-label flex items-center gap-1.5">
                 <Home size={16} color="var(--primary-terracotta)" /> Morada de Registo / Faturação Residencial:
               </label>
               <input
@@ -94,7 +83,7 @@ export const BuyItemModal = () => {
                 onChange={(e) => setShippingAddress(e.target.value)}
                 placeholder="Insere a tua morada principal..."
               />
-              <span style={{ fontSize: '11px', color: 'var(--text-light)' }}>
+              <span className="text-xs text-light">
                 Ficas com a peça na mala de regresso ou enviamos para a tua casa.
               </span>
             </div>
@@ -102,8 +91,7 @@ export const BuyItemModal = () => {
             {/* Confirm Payment CTA */}
             <button
               onClick={handleConfirmPurchase}
-              className="btn-primary"
-              style={{ width: '100%', padding: '14px', marginTop: '12px' }}
+              className="btn-primary btn-full-width"
             >
               <CreditCard size={18} /> Confirmar Compra por {priceDiff}€
             </button>

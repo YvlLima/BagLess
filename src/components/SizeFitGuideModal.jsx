@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, Sparkles, Check, Ruler } from 'lucide-react';
 
-export const SizeFitGuideModal = ({ isOpen, onClose, onSelectSize, currentCategory = 'roupa' }) => {
+export const SizeFitGuideModal = ({ isOpen, onClose, onSelectSize, _currentCategory = 'roupa' }) => {
   const [height, setHeight] = useState('175');
   const [weight, setWeight] = useState('72');
   const [fitPreference, setFitPreference] = useState('regular'); // tight | regular | oversized
@@ -13,7 +13,7 @@ export const SizeFitGuideModal = ({ isOpen, onClose, onSelectSize, currentCatego
     const h = parseInt(height, 10) || 175;
     const w = parseInt(weight, 10) || 72;
 
-    let size = 'M';
+    let size;
     if (w < 60) size = 'S';
     else if (w < 78) size = fitPreference === 'oversized' ? 'L' : 'M';
     else if (w < 90) size = fitPreference === 'tight' ? 'M' : 'L';
@@ -30,37 +30,26 @@ export const SizeFitGuideModal = ({ isOpen, onClose, onSelectSize, currentCatego
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '480px' }}>
+      <div className="modal-content max-w-md" onClick={(e) => e.stopPropagation()}>
         <button
           onClick={onClose}
-          style={{
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            background: 'var(--bg-subtle)',
-            borderRadius: '50%',
-            width: '32px',
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
+          className="modal-close-btn"
         >
           <X size={18} />
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary-terracotta)', fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', marginBottom: '8px' }}>
+        <div className="modal-title-sparkle">
           <Sparkles size={16} /> Assistente Inteligente de Medidas
         </div>
 
-        <h2 className="heading-md" style={{ fontSize: '20px', marginBottom: '6px' }}>
+        <h2 className="heading-md text-xl mb-1.5">
           Recomendador de Tamanho Bagless Fit
         </h2>
-        <p className="subheading" style={{ fontSize: '13px', marginBottom: '20px' }}>
+        <p className="subheading text-xs mb-5">
           Garante o caimento ideal sem precisares de provar antes da viagem.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+        <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="form-group">
             <label className="form-label">Altura (cm):</label>
             <input
@@ -85,9 +74,9 @@ export const SizeFitGuideModal = ({ isOpen, onClose, onSelectSize, currentCatego
         </div>
 
         {/* Fit Preference Chips */}
-        <div className="form-group" style={{ marginBottom: '20px' }}>
+        <div className="form-group mb-5">
           <label className="form-label">Preferência de Caimento:</label>
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div className="flex gap-2">
             {[
               { id: 'tight', label: 'Ajustado / Slim' },
               { id: 'regular', label: 'Normal / Regular' },
@@ -96,8 +85,7 @@ export const SizeFitGuideModal = ({ isOpen, onClose, onSelectSize, currentCatego
               <button
                 key={f.id}
                 onClick={() => setFitPreference(f.id)}
-                className={`chip-item ${fitPreference === f.id ? 'selected' : ''}`}
-                style={{ fontSize: '12px', padding: '6px 12px' }}
+                className={`chip-item ${fitPreference === f.id ? 'selected' : ''} text-xs py-1.5 px-3`}
               >
                 {f.label}
               </button>
@@ -105,27 +93,19 @@ export const SizeFitGuideModal = ({ isOpen, onClose, onSelectSize, currentCatego
           </div>
         </div>
 
-        <button onClick={handleCalculateSize} className="btn-secondary" style={{ width: '100%', padding: '12px', marginBottom: '16px' }}>
+        <button onClick={handleCalculateSize} className="btn-secondary btn-full-width py-3 mb-4">
           <Ruler size={16} /> Calcular Tamanho Recomendado
         </button>
 
         {calculatedResult && (
-          <div
-            style={{
-              background: 'var(--accent-olive-light)',
-              border: '1px solid #D2E0CD',
-              borderRadius: 'var(--radius-md)',
-              padding: '16px',
-              textAlign: 'center'
-            }}
-          >
-            <div style={{ fontSize: '12px', color: 'var(--accent-olive)', fontWeight: 700, textTransform: 'uppercase' }}>
+          <div className="weather-badge-container flex-col text-center p-4">
+            <div className="text-xs text-olive font-bold uppercase">
               Tamanho Recomendado ({calculatedResult.confidence}% de Precisão)
             </div>
-            <div style={{ fontSize: '32px', fontWeight: 800, color: '#32422C', margin: '4px 0' }}>
+            <div className="text-3xl font-extrabold text-main my-1">
               Tamanho {calculatedResult.size}
             </div>
-            <div style={{ fontSize: '12px', color: '#526348', marginBottom: '12px' }}>
+            <div className="text-xs text-muted mb-3">
               {calculatedResult.reason}
             </div>
 
@@ -134,8 +114,7 @@ export const SizeFitGuideModal = ({ isOpen, onClose, onSelectSize, currentCatego
                 onSelectSize(calculatedResult.size);
                 onClose();
               }}
-              className="btn-primary"
-              style={{ width: '100%', padding: '10px', fontSize: '13px', backgroundColor: 'var(--accent-olive)' }}
+              className="btn-primary btn-in-kit btn-full-width py-2.5 text-xs"
             >
               <Check size={16} /> Selecionar Tamanho {calculatedResult.size}
             </button>

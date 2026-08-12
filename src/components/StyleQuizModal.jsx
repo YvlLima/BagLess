@@ -36,33 +36,22 @@ export const StyleQuizModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '520px' }}>
+      <div className="modal-content max-w-lg" onClick={(e) => e.stopPropagation()}>
         <button
           onClick={onClose}
-          style={{
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            background: 'var(--bg-subtle)',
-            borderRadius: '50%',
-            width: '32px',
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
+          className="modal-close-btn"
         >
           <X size={18} />
         </button>
 
-        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--primary-terracotta)', fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', marginBottom: '6px' }}>
+        <div className="text-center mb-5">
+          <div className="modal-title-sparkle justify-center mb-1.5">
             <Sparkles size={16} /> Quiz de Estilo Bagless AI
           </div>
-          <h2 className="heading-md" style={{ fontSize: '22px' }}>
+          <h2 className="heading-md text-xl">
             Descobre o teu DNA de Estilo de Viagem
           </h2>
-          <p className="subheading" style={{ fontSize: '13px' }}>
+          <p className="subheading text-xs">
             Passo {step} de 3 — Responde a 3 perguntas rápidas para personalizarmos as tuas recomendações.
           </p>
         </div>
@@ -70,10 +59,10 @@ export const StyleQuizModal = ({ isOpen, onClose }) => {
         {/* Step 1: Vibe */}
         {step === 1 && (
           <div>
-            <label className="form-label" style={{ marginBottom: '12px', display: 'block' }}>
+            <label className="form-label mb-3 block">
               Qual é a estética que mais te define quando viajas?
             </label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '20px' }}>
+            <div className="grid grid-cols-2 gap-3 mb-5">
               {[
                 { id: 'minimalist', title: '🌿 Minimalista Chic', desc: 'Linhas simples, linho e tons neutros' },
                 { id: 'resort', title: '🏖️ Resort & Praia', desc: 'Vestidos leves, calções de banho e estampas' },
@@ -83,20 +72,14 @@ export const StyleQuizModal = ({ isOpen, onClose }) => {
                 <div
                   key={item.id}
                   onClick={() => setVibe(item.id)}
-                  style={{
-                    padding: '14px',
-                    borderRadius: 'var(--radius-md)',
-                    border: vibe === item.id ? '2px solid var(--primary-terracotta)' : '1px solid var(--border-medium)',
-                    background: vibe === item.id ? 'var(--primary-terracotta-light)' : 'var(--bg-surface)',
-                    cursor: 'pointer'
-                  }}
+                  className={`quiz-option-card ${vibe === item.id ? 'selected' : ''}`}
                 >
-                  <div style={{ fontWeight: 700, fontSize: '14px', marginBottom: '4px' }}>{item.title}</div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{item.desc}</div>
+                  <div className="font-bold text-sm mb-1">{item.title}</div>
+                  <div className="text-xs text-muted">{item.desc}</div>
                 </div>
               ))}
             </div>
-            <button className="btn-primary" onClick={() => setStep(2)} style={{ width: '100%', padding: '12px' }}>
+            <button className="btn-primary btn-full-width py-3" onClick={() => setStep(2)}>
               Seguinte (2/3)
             </button>
           </div>
@@ -105,10 +88,10 @@ export const StyleQuizModal = ({ isOpen, onClose }) => {
         {/* Step 2: Colors */}
         {step === 2 && (
           <div>
-            <label className="form-label" style={{ marginBottom: '12px', display: 'block' }}>
+            <label className="form-label mb-3 block">
               Que paleta de cores preferes vestir?
             </label>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+            <div className="flex-col gap-3 mb-5">
               {[
                 { id: 'neutrals', title: 'Tons Terra & Neutros', desc: 'Bege, Branco, Terracota, Oliva e Castanho' },
                 { id: 'vibrant', title: 'Cores Vivas & Vibrantes', desc: 'Azul cobalto, Amarelo solar e Vermelho' },
@@ -117,24 +100,18 @@ export const StyleQuizModal = ({ isOpen, onClose }) => {
                 <div
                   key={item.id}
                   onClick={() => setColors(item.id)}
-                  style={{
-                    padding: '14px',
-                    borderRadius: 'var(--radius-md)',
-                    border: colors === item.id ? '2px solid var(--primary-terracotta)' : '1px solid var(--border-medium)',
-                    background: colors === item.id ? 'var(--primary-terracotta-light)' : 'var(--bg-surface)',
-                    cursor: 'pointer'
-                  }}
+                  className={`quiz-option-card ${colors === item.id ? 'selected' : ''}`}
                 >
-                  <div style={{ fontWeight: 700, fontSize: '14px' }}>{item.title}</div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{item.desc}</div>
+                  <div className="font-bold text-sm">{item.title}</div>
+                  <div className="text-xs text-muted">{item.desc}</div>
                 </div>
               ))}
             </div>
-            <div style={{ display: 'flex', gap: '12px' }}>
-              <button className="btn-secondary" onClick={() => setStep(1)} style={{ flex: 1, padding: '12px' }}>
+            <div className="flex gap-3">
+              <button className="btn-secondary flex-1 py-3" onClick={() => setStep(1)}>
                 Anterior
               </button>
-              <button className="btn-primary" onClick={() => setStep(3)} style={{ flex: 1, padding: '12px' }}>
+              <button className="btn-primary flex-1 py-3" onClick={() => setStep(3)}>
                 Seguinte (3/3)
               </button>
             </div>
@@ -144,10 +121,10 @@ export const StyleQuizModal = ({ isOpen, onClose }) => {
         {/* Step 3: Fit */}
         {step === 3 && (
           <div>
-            <label className="form-label" style={{ marginBottom: '12px', display: 'block' }}>
+            <label className="form-label mb-3 block">
               Qual é o teu caimento ideal de roupa?
             </label>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+            <div className="flex-col gap-3 mb-5">
               {[
                 { id: 'slim', title: 'Ajustado ao Corpo (Slim Fit)', desc: 'Silhueta elegante e cintada' },
                 { id: 'regular', title: 'Caimento Clássico (Regular Fit)', desc: 'Conforto equilibrado para o dia a dia' },
@@ -156,24 +133,18 @@ export const StyleQuizModal = ({ isOpen, onClose }) => {
                 <div
                   key={item.id}
                   onClick={() => setFit(item.id)}
-                  style={{
-                    padding: '14px',
-                    borderRadius: 'var(--radius-md)',
-                    border: fit === item.id ? '2px solid var(--primary-terracotta)' : '1px solid var(--border-medium)',
-                    background: fit === item.id ? 'var(--primary-terracotta-light)' : 'var(--bg-surface)',
-                    cursor: 'pointer'
-                  }}
+                  className={`quiz-option-card ${fit === item.id ? 'selected' : ''}`}
                 >
-                  <div style={{ fontWeight: 700, fontSize: '14px' }}>{item.title}</div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{item.desc}</div>
+                  <div className="font-bold text-sm">{item.title}</div>
+                  <div className="text-xs text-muted">{item.desc}</div>
                 </div>
               ))}
             </div>
-            <div style={{ display: 'flex', gap: '12px' }}>
-              <button className="btn-secondary" onClick={() => setStep(2)} style={{ flex: 1, padding: '12px' }}>
+            <div className="flex gap-3">
+              <button className="btn-secondary flex-1 py-3" onClick={() => setStep(2)}>
                 Anterior
               </button>
-              <button className="btn-primary" onClick={handleComplete} style={{ flex: 1, padding: '12px' }}>
+              <button className="btn-primary flex-1 py-3" onClick={handleComplete}>
                 Guardar DNA de Estilo ✨
               </button>
             </div>

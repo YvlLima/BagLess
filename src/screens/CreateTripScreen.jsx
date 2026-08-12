@@ -24,6 +24,7 @@ export const CreateTripScreen = () => {
     if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
 
     if (searchLocation.trim().length < 2) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSuggestions([]);
       setIsSearching(false);
       setSearchError(false);
@@ -87,8 +88,8 @@ export const CreateTripScreen = () => {
   };
 
   return (
-    <div style={{ maxWidth: '850px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '24px' }}>
+    <div className="max-w-3xl mx-auto">
+      <div className="mb-6">
         <span className="slogan-tag">Bagless Global Autocomplete & Live Weather</span>
         <h1 className="heading-xl">Para onde vais viajar no mundo?</h1>
         <p className="subheading">
@@ -97,61 +98,36 @@ export const CreateTripScreen = () => {
       </div>
 
       {/* Worldwide Destination Search Bar with Live Autocomplete */}
-      <div className="form-group" style={{ marginBottom: '28px', position: 'relative' }}>
-        <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '15px' }}>
+      <div className="form-group mb-7 relative">
+        <label className="form-label flex items-center gap-1.5 text-base">
           <Globe size={18} color="var(--primary-terracotta)" /> Pesquisar Qualquer Cidade ou País do Mundo:
         </label>
         
-        <div style={{ position: 'relative' }}>
-          <Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-light)' }} />
+        <div className="relative">
+          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-light" />
           <input
             type="text"
-            className="form-input"
-            style={{ paddingLeft: '44px', paddingRight: '40px', fontSize: '15px', height: '48px' }}
+            className="form-input pl-11 pr-10 text-base h-12"
             placeholder="Escreve uma cidade (ex: Budapeste, Nova Iorque, Dubai, Bali, Londres, Paris, Tóquio, Roma...)"
             value={searchLocation}
             onChange={(e) => setSearchLocation(e.target.value)}
           />
           {isSearching && (
-            <Loader2 size={18} className="spin" style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--primary-terracotta)' }} />
+            <Loader2 size={18} className="spin absolute right-4 top-1/2 -translate-y-1/2 text-terracotta" />
           )}
         </div>
 
         {/* Autocomplete Dropdown List */}
         {suggestions.length > 0 && (
-          <div
-            style={{
-              position: 'absolute',
-              top: '100%',
-              left: 0,
-              right: 0,
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-medium)',
-              borderRadius: 'var(--radius-md)',
-              boxShadow: 'var(--shadow-lg)',
-              zIndex: 150,
-              marginTop: '4px',
-              overflow: 'hidden'
-            }}
-          >
+          <div className="autocomplete-dropdown">
             {suggestions.map((item) => (
               <div
                 key={item.id}
                 onClick={() => handleSelectSuggestion(item)}
-                style={{
-                  padding: '12px 16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  cursor: 'pointer',
-                  borderBottom: '1px solid var(--border-light)',
-                  fontSize: '14px'
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--bg-subtle)')}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                className="autocomplete-item"
               >
                 <MapPin size={16} color="var(--primary-terracotta)" />
-                <span style={{ fontWeight: 600 }}>{item.displayName}</span>
+                <span className="font-semibold">{item.displayName}</span>
               </div>
             ))}
           </div>
@@ -159,7 +135,7 @@ export const CreateTripScreen = () => {
 
         {/* Error message handling */}
         {searchError && (
-          <div style={{ marginTop: '8px', fontSize: '13px', color: '#D9534F', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <div className="mt-2 text-xs text-red-600 flex items-center gap-1.5">
             <AlertCircle size={14} />
             Não encontrámos esse destino, tenta escrever de outra forma (ex: Budapeste, Hungria).
           </div>
@@ -167,9 +143,9 @@ export const CreateTripScreen = () => {
       </div>
 
       {/* Popular Destination Cards (Shortcuts) */}
-      <div className="form-group" style={{ marginBottom: '24px' }}>
+      <div className="form-group mb-6">
         <label className="form-label">ou Atalhos de Destinos Populares:</label>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px' }}>
+        <div className="popular-dest-grid">
           {POPULAR_DESTINATIONS.map((d) => {
             const isSelected = selectedDest.id === d.id;
             return (
@@ -180,28 +156,20 @@ export const CreateTripScreen = () => {
                   setSearchLocation('');
                   setHotelAddress(`Hotel no destino em ${d.name}`);
                 }}
-                style={{
-                  borderRadius: 'var(--radius-md)',
-                  border: isSelected ? '2px solid var(--primary-terracotta)' : '1px solid var(--border-medium)',
-                  overflow: 'hidden',
-                  cursor: 'pointer',
-                  background: 'var(--bg-surface)',
-                  transition: 'var(--transition-fast)',
-                  position: 'relative'
-                }}
+                className={`popular-dest-card ${isSelected ? 'selected' : ''}`}
               >
-                <div style={{ height: '90px', background: '#DDD', position: 'relative' }}>
-                  <img src={d.coverImage} alt={d.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <span style={{ position: 'absolute', top: '8px', left: '8px', fontSize: '20px' }}>{d.flag}</span>
+                <div className="h-24 bg-gray-300 relative">
+                  <img src={d.coverImage} alt={d.name} className="w-full h-full object-cover" />
+                  <span className="absolute top-2 left-2 text-xl">{d.flag}</span>
                   {isSelected && (
-                    <div style={{ position: 'absolute', top: '8px', right: '8px', background: 'var(--primary-terracotta)', color: '#FFF', borderRadius: '50%', padding: '4px' }}>
+                    <div className="absolute top-2 right-2 bg-terracotta text-white rounded-full p-1">
                       <Check size={14} />
                     </div>
                   )}
                 </div>
-                <div style={{ padding: '10px 12px' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 700 }}>{d.name}</div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{d.weather.temp} • {d.weather.condition}</div>
+                <div className="p-2.5">
+                  <div className="text-xs font-bold">{d.name}</div>
+                  <div className="text-xs text-muted">{d.weather.temp} • {d.weather.condition}</div>
                 </div>
               </div>
             );
@@ -213,17 +181,17 @@ export const CreateTripScreen = () => {
       <WeatherBadge destination={selectedDest} />
 
       {/* Dates and Hotel Address Form */}
-      <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-lg)', padding: '24px', marginBottom: '24px', boxShadow: 'var(--shadow-sm)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '20px' }}>
+      <div className="bg-surface border border-light rounded-lg p-6 mb-6 shadow-sm">
+        <div className="grid grid-cols-2 gap-4 mb-5">
           <div className="form-group">
-            <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <label className="form-label flex items-center gap-1.5">
               <Calendar size={16} color="var(--primary-terracotta)" /> Data de Chegada (Check-in)
             </label>
             <input type="date" className="form-input" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
           </div>
 
           <div className="form-group">
-            <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <label className="form-label flex items-center gap-1.5">
               <Calendar size={16} color="var(--primary-terracotta)" /> Data de Regresso (Check-out)
             </label>
             <input type="date" className="form-input" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
@@ -231,7 +199,7 @@ export const CreateTripScreen = () => {
         </div>
 
         <div className="form-group">
-          <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <label className="form-label flex items-center gap-1.5">
             <Hotel size={16} color="var(--primary-terracotta)" /> Morada de Entrega no Destino (Hotel, Resort ou Airbnb)
           </label>
           <input
@@ -241,13 +209,13 @@ export const CreateTripScreen = () => {
             onChange={(e) => setHotelAddress(e.target.value)}
             placeholder="Ex: Nome do Hotel / Airbnb, Rua e Cidade no destino..."
           />
-          <span style={{ fontSize: '11px', color: 'var(--text-light)' }}>
+          <span className="text-xs text-light">
             A Bagless entrega a mala pronta e higienizada na receção antes da tua chegada.
           </span>
         </div>
       </div>
 
-      <button onClick={handleSaveTrip} className="btn-primary" style={{ width: '100%', padding: '14px', fontSize: '15px' }}>
+      <button onClick={handleSaveTrip} className="btn-primary btn-full-width text-base">
         Escolher Guarda-Roupa para {selectedDest.name} <ArrowRight size={18} />
       </button>
     </div>

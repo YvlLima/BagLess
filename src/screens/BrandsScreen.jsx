@@ -20,8 +20,8 @@ export const BrandsScreen = () => {
   };
 
   return (
-    <div style={{ maxWidth: '950px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '24px' }}>
+    <div className="max-w-4xl mx-auto">
+      <div className="mb-6">
         <span className="slogan-tag">Bagless Official Partner Directory</span>
         <h1 className="heading-xl">Diretório Oficial de Marcas Parceiras</h1>
         <p className="subheading">
@@ -31,51 +31,41 @@ export const BrandsScreen = () => {
 
       {/* Brand Grid */}
       {BRANDS.length === 0 ? (
-        <div style={{ background: 'var(--bg-surface)', border: '1px dashed var(--border-medium)', borderRadius: 'var(--radius-md)', padding: '48px 24px', textAlign: 'center', color: 'var(--text-muted)' }}>
-          <h3 className="heading-md" style={{ marginBottom: '8px', color: 'var(--text-main)' }}>Nenhuma marca parceira disponível</h3>
-          <p style={{ fontSize: '13px' }}>De momento, não existem marcas registadas no catálogo.</p>
+        <div className="empty-state-wrapper bg-surface border border-dashed rounded-md p-12 text-muted">
+          <h3 className="heading-md mb-2 text-main">Nenhuma marca parceira disponível</h3>
+          <p className="text-xs">De momento, não existem marcas registadas no catálogo.</p>
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
+        <div className="brand-card-grid">
           {BRANDS.map((brand) => (
             <div
               key={brand.id}
-              style={{
-                background: 'var(--bg-surface)',
-                border: '1px solid var(--border-light)',
-                borderRadius: 'var(--radius-md)',
-                padding: '20px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                transition: 'var(--transition-fast)'
-              }}
+              className="brand-card"
             >
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <div className="flex justify-between items-center mb-2.5">
                   {getTierBadge(brand.tier)}
-                  <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <span className="text-xs text-muted font-semibold flex items-center gap-1">
                     <Globe size={13} /> {brand.origin}
                   </span>
                 </div>
 
-                <h3 style={{ fontSize: '18px', fontWeight: 800, color: 'var(--text-main)', marginBottom: '6px' }}>
+                <h3 className="text-lg font-extrabold text-main mb-1.5">
                   {brand.name}
                 </h3>
 
-                <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: '16px' }}>
+                <p className="text-xs text-muted leading-relaxed mb-4">
                   {brand.description}
                 </p>
               </div>
 
-              <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ fontSize: '11px', color: 'var(--text-light)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <div className="border-t border-light pt-3 flex justify-between items-center">
+                <div className="text-xs text-light flex items-center gap-1">
                   <ShieldCheck size={13} color="var(--accent-olive)" /> Feed Autêntico
                 </div>
 
                 <button
-                  className="btn-secondary"
-                  style={{ fontSize: '12px', padding: '6px 12px' }}
+                  className="btn-secondary text-xs py-1.5 px-3"
                   onClick={() => setCurrentScreen('catalog')}
                 >
                   Ver Catálogo <ArrowRight size={14} />

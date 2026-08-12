@@ -56,11 +56,11 @@ export const ProductCard = ({ product }) => {
   return (
     <div className="card-product">
       {/* Product Image */}
-      <div className="product-img-wrapper" onClick={() => setSelectedProduct(product)} style={{ cursor: 'pointer' }}>
+      <div className="product-img-wrapper product-img-clickable" onClick={() => setSelectedProduct(product)}>
         <ProductImagePlaceholder name={product.name} brandName={product.brandName} />
 
         {/* Brand Tier Badge */}
-        <div style={{ position: 'absolute', top: '10px', left: '10px', display: 'flex', gap: '4px', flexDirection: 'column' }}>
+        <div className="product-card-badges">
           <span className={`badge-tier ${getTierClass(product.tier)}`}>
             {getTierLabel(product.tier)}
           </span>
@@ -72,79 +72,53 @@ export const ProductCard = ({ product }) => {
             e.stopPropagation();
             toggleWishlist(product);
           }}
-          style={{
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
-            background: 'var(--bg-surface)',
-            backdropFilter: 'blur(4px)',
-            borderRadius: '50%',
-            width: '32px',
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: isFavorite ? '#C85A32' : 'var(--text-muted)'
-          }}
+          className="product-card-fav-btn"
+          style={{ color: isFavorite ? '#C85A32' : 'var(--text-muted)' }}
         >
           <Heart size={16} fill={isFavorite ? '#C85A32' : 'none'} />
         </button>
       </div>
 
       {/* Card Info */}
-      <div style={{ padding: '16px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div className="product-card-body">
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em' }}>
+          <div className="product-card-header-row">
+            <div className="product-card-brand-label">
               {product.brandName}
             </div>
-            <span style={{ fontSize: '10px', color: 'var(--accent-olive)', fontWeight: 600 }}>
+            <span className="product-card-stock-label">
               ● Em Stock
             </span>
           </div>
 
           <h3
             onClick={() => setSelectedProduct(product)}
-            style={{
-              fontSize: '15px',
-              fontWeight: 700,
-              color: 'var(--text-main)',
-              margin: '4px 0 6px 0',
-              cursor: 'pointer',
-              lineHeight: 1.3
-            }}
+            className="product-card-name"
           >
             {product.name}
           </h3>
 
           {/* Legal Partner Feed Attribution */}
-          <div style={{ fontSize: '10px', color: 'var(--text-light)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <div className="product-card-attribution">
             <ShieldCheck size={12} color="var(--accent-olive)" />
             <span>{product.merchantAttribution || 'Zalando & ASOS Partner Feed'}</span>
           </div>
         </div>
 
         {/* Pricing & Rent CTA */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border-light)', paddingTop: '12px', marginTop: 'auto' }}>
+        <div className="product-card-footer-row">
           <div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--primary-terracotta)' }}>
-              {formatPrice(product.rentalPricePerDay)} <span style={{ fontSize: '11px', fontWeight: 500, color: 'var(--text-muted)' }}>/ dia</span>
+            <div className="product-card-price-primary">
+              {formatPrice(product.rentalPricePerDay)} <span className="product-card-price-unit">/ dia</span>
             </div>
-            <div style={{ fontSize: '11px', color: 'var(--text-light)' }}>
+            <div className="product-card-price-buy">
               Compra: {formatPrice(product.fullPurchasePrice)}
             </div>
           </div>
 
           <button
             onClick={handleToggleKit}
-            className="btn-primary"
-            style={{
-              padding: '8px 14px',
-              fontSize: '13px',
-              backgroundColor: isInKit ? 'var(--accent-olive)' : 'var(--primary-terracotta)',
-              cursor: 'pointer',
-              transition: 'var(--transition-fast)'
-            }}
+            className={`btn-primary product-card-btn ${isInKit ? 'btn-in-kit' : 'btn-add-kit'}`}
             title={isInKit ? 'Clique para remover do Kit' : 'Clique para alugar e adicionar ao Kit'}
           >
             {isInKit ? (

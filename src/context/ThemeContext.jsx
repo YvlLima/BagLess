@@ -8,7 +8,7 @@ export const ThemeProvider = ({ children }) => {
       const saved = localStorage.getItem('bagless_theme');
       if (saved) return saved;
       return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    } catch (e) {
+    } catch {
       return 'light';
     }
   });
@@ -17,8 +17,8 @@ export const ThemeProvider = ({ children }) => {
     try {
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('bagless_theme', theme);
-    } catch (e) {
-      console.error('Failed to set theme in localStorage', e);
+    } catch {
+      // Theme set fallback
     }
   }, [theme]);
 

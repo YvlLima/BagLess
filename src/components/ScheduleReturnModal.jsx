@@ -22,50 +22,39 @@ export const ScheduleReturnModal = ({ isOpen, onClose, onConfirmPickup }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '520px' }}>
+      <div className="modal-content max-w-lg" onClick={(e) => e.stopPropagation()}>
         <button
           onClick={onClose}
-          style={{
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            background: 'var(--bg-subtle)',
-            borderRadius: '50%',
-            width: '32px',
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
+          className="modal-close-btn"
         >
           <X size={18} />
         </button>
 
         {isSuccess ? (
-          <div style={{ textAlign: 'center', padding: '32px 16px' }}>
-            <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'var(--accent-olive-light)', color: 'var(--accent-olive)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px auto' }}>
+          <div className="modal-success-box">
+            <div className="modal-success-icon-bg">
               <CheckCircle2 size={36} />
             </div>
-            <h3 className="heading-md" style={{ fontSize: '22px', marginBottom: '8px' }}>Recolha no Hotel Agendada!</h3>
-            <p className="subheading" style={{ fontSize: '13px' }}>
+            <h3 className="heading-md text-xl mb-2">Recolha no Hotel Agendada!</h3>
+            <p className="subheading text-xs">
               O transportador ecológico Bagless recolherá a mala na receção às {pickupTime} do dia {currentTrip.endDate}.
             </p>
           </div>
         ) : (
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary-terracotta)', fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', marginBottom: '8px' }}>
+            <div className="modal-title-sparkle">
               <Truck size={16} /> Agendamento de Devolução Sem Custos
             </div>
 
-            <h2 className="heading-md" style={{ fontSize: '22px', marginBottom: '8px' }}>
+            <h2 className="heading-md text-xl mb-2">
               Agendar Recolha na Receção do Hotel
             </h2>
-            <p className="subheading" style={{ fontSize: '13px', marginBottom: '20px' }}>
+            <p className="subheading text-xs mb-5">
               No dia do check-out, basta deixar as peças não compradas dentro do saco Bagless selado na receção.
             </p>
 
             <div className="form-group">
-              <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <label className="form-label flex items-center gap-1.5">
                 <Clock size={16} color="var(--primary-terracotta)" /> Hora Prevista de Check-out:
               </label>
               <select className="form-select" value={pickupTime} onChange={(e) => setPickupTime(e.target.value)}>
@@ -77,27 +66,26 @@ export const ScheduleReturnModal = ({ isOpen, onClose, onConfirmPickup }) => {
               </select>
             </div>
 
-            <div className="form-group" style={{ marginBottom: '20px' }}>
-              <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div className="form-group mb-5">
+              <label className="form-label flex items-center gap-1.5">
                 <Hotel size={16} color="var(--primary-terracotta)" /> Instruções para a Receção:
               </label>
               <textarea
-                className="form-input"
-                style={{ height: '80px', resize: 'none' }}
+                className="form-input h-20 resize-none"
                 value={hotelNotes}
                 onChange={(e) => setHotelNotes(e.target.value)}
               />
             </div>
 
-            <div style={{ background: 'var(--bg-subtle)', borderRadius: 'var(--radius-md)', padding: '12px 16px', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div className="receipt-qr-card mb-5 text-xs text-muted">
               <Tag size={20} color="var(--accent-olive)" />
               <div>
-                <strong style={{ color: 'var(--text-main)' }}>Selo Digital de Devolução Verde #SEAL-882</strong><br />
+                <strong className="text-main">Selo Digital de Devolução Verde #SEAL-882</strong><br />
                 Fornecemos uma etiqueta com código de barras para colar no saco antes de entregar ao staff.
               </div>
             </div>
 
-            <button onClick={handleConfirm} className="btn-primary" style={{ width: '100%', padding: '14px', fontSize: '15px' }}>
+            <button onClick={handleConfirm} className="btn-primary btn-full-width text-base">
               Confirmar Agendamento de Recolha
             </button>
           </div>

@@ -17,27 +17,15 @@ export const TripHistoryScreen = () => {
 
   if (!tripHistory || tripHistory.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '60px 20px' }}>
-        <div
-          style={{
-            width: '80px',
-            height: '80px',
-            borderRadius: '50%',
-            background: 'var(--accent-olive-light)',
-            color: 'var(--accent-olive)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto 20px auto'
-          }}
-        >
+      <div className="empty-state-wrapper">
+        <div className="empty-state-icon-bg">
           <Calendar size={36} />
         </div>
 
-        <h2 className="heading-lg" style={{ marginBottom: '8px' }}>
+        <h2 className="heading-lg empty-state-title">
           Sem Histórico de Viagens Concluídas
         </h2>
-        <p className="subheading" style={{ maxWidth: '440px', margin: '0 auto 24px auto' }}>
+        <p className="subheading empty-state-text">
           Assim que concluir a sua primeira viagem com o Bagless, o histórico com todas as peças alugadas e a opção de repetir kit ficarão disponíveis aqui.
         </p>
 
@@ -49,75 +37,47 @@ export const TripHistoryScreen = () => {
   }
 
   return (
-    <div style={{ paddingBottom: '40px' }}>
+    <div className="page-container">
       {/* Header */}
-      <div style={{ marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid var(--border-light)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Calendar size={24} color="var(--primary-terracotta)" />
-          <h1 className="heading-xl">Histórico de Viagens Passadas</h1>
+      <div className="page-header-row">
+        <div>
+          <div className="page-header-left">
+            <Calendar size={24} color="var(--primary-terracotta)" />
+            <h1 className="heading-xl">Histórico de Viagens Passadas</h1>
+          </div>
+          <p className="subheading mt-1">
+            Consulte as suas viagens anteriores e reutilize o mesmo kit de vestuário com um só clique.
+          </p>
         </div>
-        <p className="subheading" style={{ marginTop: '4px' }}>
-          Consulte as suas viagens anteriores e reutilize o mesmo kit de vestuário com um só clique.
-        </p>
       </div>
 
       {/* Trips List */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div className="flex-col gap-6">
         {tripHistory.map((trip) => (
           <div
             key={trip.id}
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-light)',
-              borderRadius: 'var(--radius-lg)',
-              padding: '24px',
-              boxShadow: 'var(--shadow-sm)',
-              transition: 'var(--transition-normal)'
-            }}
+            className="trip-card-container"
           >
             {/* Trip Header Banner */}
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                flexWrap: 'wrap',
-                gap: '12px',
-                borderBottom: '1px solid var(--border-light)',
-                paddingBottom: '16px',
-                marginBottom: '16px'
-              }}
-            >
+            <div className="trip-card-header">
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                  <span style={{ fontSize: '24px' }}>{trip.destination.flag || '✈️'}</span>
-                  <h2 className="heading-lg" style={{ margin: 0 }}>
+                <div className="trip-card-dest-title">
+                  <span className="text-2xl">{trip.destination.flag || '✈️'}</span>
+                  <h2 className="heading-lg m-0">
                     {trip.destination.title}, {trip.destination.country}
                   </h2>
-                  <span
-                    style={{
-                      background: 'var(--accent-olive-light)',
-                      color: 'var(--accent-olive)',
-                      fontSize: '11px',
-                      fontWeight: 700,
-                      padding: '4px 10px',
-                      borderRadius: 'var(--radius-full)',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '4px'
-                    }}
-                  >
+                  <span className="trip-card-badge">
                     <CheckCircle2 size={12} /> {trip.status || 'Concluída'}
                   </span>
                 </div>
 
-                <div style={{ fontSize: '13px', color: 'var(--text-muted)', display: 'flex', gap: '16px', flexWrap: 'wrap', marginTop: '6px' }}>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <div className="trip-card-meta">
+                  <span className="trip-card-meta-item">
                     <Calendar size={14} color="var(--primary-terracotta)" />
                     {trip.startDate} a {trip.endDate}
                   </span>
                   {trip.hotel && (
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                    <span className="trip-card-meta-item">
                       <MapPin size={14} color="var(--primary-terracotta)" />
                       {trip.hotel}
                     </span>
@@ -125,65 +85,40 @@ export const TripHistoryScreen = () => {
                 </div>
               </div>
 
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>
+              <div className="trip-card-cost-col">
+                <div className="trip-card-cost-label">
                   Custo Total do Aluguer
                 </div>
-                <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--primary-terracotta)' }}>
+                <div className="trip-card-cost-val">
                   {formatPrice(trip.totalCost)}
                 </div>
               </div>
             </div>
 
             {/* Rented Items Grid / Thumbnails */}
-            <div style={{ marginBottom: '16px' }}>
-              <div style={{ fontSize: '13px', fontWeight: 700, marginBottom: '12px', color: 'var(--text-main)' }}>
+            <div className="mb-4">
+              <div className="text-sm font-bold mb-3 text-main">
                 🧳 Kit Alugado ({trip.items?.length || 0} peças):
               </div>
 
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-                  gap: '12px'
-                }}
-              >
+              <div className="trip-items-grid">
                 {trip.items?.map((item, idx) => (
                   <div
                     key={`${item.id}-${idx}`}
                     onClick={() => setSelectedProduct(item)}
-                    style={{
-                      background: 'var(--bg-subtle)',
-                      border: '1px solid var(--border-light)',
-                      borderRadius: 'var(--radius-md)',
-                      padding: '10px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '10px',
-                      cursor: 'pointer',
-                      transition: 'transform 0.15s ease'
-                    }}
+                    className="trip-item-card"
                   >
-                    <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-sm)', overflow: 'hidden', position: 'relative', flexShrink: 0 }}>
+                    <div className="trip-item-thumb">
                       <ProductImagePlaceholder name={item.name} brandName={item.brandName} style={{ padding: '4px' }} />
                     </div>
-                    <div style={{ overflow: 'hidden' }}>
-                      <div style={{ fontSize: '10px', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                    <div className="trip-item-info">
+                      <div className="trip-item-brand">
                         {item.brandName}
                       </div>
-                      <div
-                        style={{
-                          fontSize: '12px',
-                          fontWeight: 700,
-                          color: 'var(--text-main)',
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis'
-                        }}
-                      >
+                      <div className="trip-item-name">
                         {item.name}
                       </div>
-                      <div style={{ fontSize: '10px', color: 'var(--primary-terracotta)', fontWeight: 600 }}>
+                      <div className="trip-item-size">
                         Tam: {item.selectedSize || 'M'}
                       </div>
                     </div>
@@ -193,11 +128,10 @@ export const TripHistoryScreen = () => {
             </div>
 
             {/* Card Action CTAs */}
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', paddingTop: '12px', borderTop: '1px solid var(--border-light)' }}>
+            <div className="trip-card-actions">
               <button
-                className="btn-primary"
+                className="btn-primary btn-small-text"
                 onClick={() => handleRepeatKit(trip)}
-                style={{ fontSize: '13px' }}
               >
                 <Repeat size={15} /> Repetir Este Kit Noutra Viagem
               </button>

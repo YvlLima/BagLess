@@ -6,7 +6,7 @@ export const BrandLogo = ({ size = 'medium', dark = false }) => {
   const accentColor = '#C85A32';
 
   return (
-    <div style={{ display: 'inline-flex', alignItems: 'center', gap: isLarge ? '12px' : '8px' }}>
+    <div className="brand-logo-container" style={{ gap: isLarge ? '12px' : '8px' }}>
       {/* SVG Icon: Luggage + Feather/Cloud Lightness Contour */}
       <svg
         width={isLarge ? '36' : '26'}
@@ -45,28 +45,21 @@ export const BrandLogo = ({ size = 'medium', dark = false }) => {
         />
       </svg>
 
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div className="brand-logo-text-group">
         <span
+          className="brand-logo-title"
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontWeight: 800,
             fontSize: isLarge ? '26px' : '19px',
-            letterSpacing: '-0.03em',
-            color: textColor,
-            lineHeight: 1
+            color: textColor
           }}
         >
           Bag<span style={{ color: accentColor }}>less</span>
         </span>
         {isLarge && (
           <span
+            className="brand-logo-subtitle"
             style={{
-              fontSize: '11px',
-              color: dark ? '#E6DEC9' : 'var(--text-muted)',
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase',
-              fontWeight: 600,
-              marginTop: '4px'
+              color: dark ? '#E6DEC9' : 'var(--text-muted)'
             }}
           >
             Travel Light. Dress Right.

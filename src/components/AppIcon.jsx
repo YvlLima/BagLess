@@ -3,19 +3,11 @@ import React from 'react';
 export const AppIcon = ({ size = 64 }) => {
   return (
     <div
+      className="app-icon-container"
       style={{
         width: `${size}px`,
         height: `${size}px`,
-        borderRadius: `${Math.round(size * 0.22)}px`,
-        background: 'linear-gradient(135deg, #FAF8F5 0%, #E6DEC9 100%)',
-        boxShadow: '0 8px 20px rgba(44, 38, 35, 0.12), inset 0 1px 1px rgba(255,255,255,0.8)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        border: '1px solid #D6CBC0',
-        position: 'relative',
-        overflow: 'hidden'
+        borderRadius: `${Math.round(size * 0.22)}px`
       }}
     >
       {/* Icon Graphic */}

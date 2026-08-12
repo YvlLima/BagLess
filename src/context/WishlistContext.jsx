@@ -1,57 +1,23 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
+import { usePersistentState } from '../utils/usePersistentState';
 
 const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
-  const [wishlist, setWishlist] = useState(() => {
-    try {
-      const saved = localStorage.getItem('bagless_wishlist');
-      return saved ? JSON.parse(saved) : [];
-    } catch (e) {
-      console.error('Failed to load wishlist from localStorage', e);
-      return [];
-    }
-  });
+  const [favorites, setFavorites] = usePersistentState('bagless_favorites', []);
 
-  useEffect(() => {
-    try {
-      localStorage.setItem('bagless_wishlist', JSON.stringify(wishlist));
-    } catch (e) {
-      console.error('Failed to save wishlist to localStorage', e);
-    }
-  }, [wishlist]);
-
-  const toggleWishlist = (product) => {
-    setWishlist((prev) => {
-      const exists = prev.some((item) => item.id === product.id);
-      if (exists) {
-        return prev.filter((item) => item.id !== product.id);
-      } else {
-        return [...prev, product];
-      }
-    });
-  };
-
-  const removeFromWishlist = (productId) => {
-    setWishlist((prev) => prev.filter((item) => item.id !== productId));
-  };
-
-  const isInWishlist = (productId) => {
-    return wishlist.some((item) => item.id === productId);
-  };
-
-  const clearWishlist = () => {
-    setWishlist([]);
+  const toggleFavorite = (productId) => {
+    setFavorites((prev) =>
+      prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
+    );
   };
 
   return (
     <WishlistContext.Provider
       value={{
-        wishlist,
-        toggleWishlist,
-        removeFromWishlist,
-        isInWishlist,
-        clearWishlist
+        favorites,
+        setFavorites,
+        toggleFavorite
       }}
     >
       {children}
@@ -59,4 +25,8 @@ export const WishlistProvider = ({ children }) => {
   );
 };
 
-export const useWishlist = () => useContext(WishlistContext);
+export const useWishlist = () => {
+  const context = useContext(WishlistContext);
+  if (!context) throw new Error('useWishlist must be used within WishlistProvider');
+  return context;
+};

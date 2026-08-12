@@ -17,44 +17,24 @@ export const ReviewCard = ({ review }) => {
   const fitStyle = getFitBadgeStyle(review.fitRating);
 
   return (
-    <div
-      style={{
-        background: 'var(--bg-surface)',
-        border: '1px solid var(--border-light)',
-        borderRadius: 'var(--radius-md)',
-        padding: '16px',
-        marginBottom: '12px'
-      }}
-    >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+    <div className="review-card-container">
+      <div className="review-card-header">
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ fontWeight: 700, fontSize: '14px', color: 'var(--text-main)' }}>
+          <div className="review-card-author-row">
+            <span className="review-card-author-name">
               {review.author}
             </span>
             {review.verifiedTrip && (
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '3px',
-                  fontSize: '11px',
-                  color: 'var(--accent-olive)',
-                  fontWeight: 600,
-                  background: 'var(--accent-olive-light)',
-                  padding: '2px 8px',
-                  borderRadius: 'var(--radius-full)'
-                }}
-              >
+              <span className="review-card-verified-badge">
                 <CheckCircle2 size={12} /> Viagem Verificada
               </span>
             )}
           </div>
-          <span style={{ fontSize: '11px', color: 'var(--text-light)' }}>{review.date}</span>
+          <span className="review-card-date">{review.date}</span>
         </div>
 
         {/* Stars */}
-        <div style={{ display: 'flex', gap: '2px' }}>
+        <div className="review-card-stars">
           {[1, 2, 3, 4, 5].map((star) => (
             <Star
               key={star}
@@ -70,14 +50,10 @@ export const ReviewCard = ({ review }) => {
       {review.fitRating && (
         <div style={{ marginBottom: '8px' }}>
           <span
+            className="review-card-fit-tag"
             style={{
-              fontSize: '11px',
-              fontWeight: 700,
-              padding: '3px 8px',
-              borderRadius: 'var(--radius-sm)',
               background: fitStyle.bg,
-              color: fitStyle.color,
-              display: 'inline-block'
+              color: fitStyle.color
             }}
           >
             📏 Caimento real: {fitStyle.label}
@@ -86,7 +62,7 @@ export const ReviewCard = ({ review }) => {
       )}
 
       {/* Comment */}
-      <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: '1.5' }}>
+      <p className="review-card-comment">
         "{review.comment}"
       </p>
     </div>

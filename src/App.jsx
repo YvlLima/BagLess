@@ -57,13 +57,13 @@ const MainContent = () => {
           <div className="mobile-notch" />
           
           {/* Status bar header */}
-          <div style={{ height: '40px', padding: '12px 20px 0 20px', display: 'flex', justifyContent: 'space-between', fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)' }}>
+          <div className="mobile-status-bar">
             <span>9:41</span>
             <span>5G 🔋</span>
           </div>
 
           {/* App Header */}
-          <div style={{ padding: '8px 16px 12px 16px', borderBottom: '1px solid var(--border-light)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-main)' }}>
+          <div className="mobile-header-bar">
             <Navbar />
           </div>
 
@@ -81,10 +81,10 @@ const MainContent = () => {
             </button>
 
             <button className={`mobile-nav-item ${currentScreen === 'wishlist' ? 'active' : ''}`} onClick={() => setCurrentScreen('wishlist')}>
-              <div style={{ position: 'relative' }}>
+              <div className="nav-icon-badge-wrapper">
                 <Heart size={20} />
                 {wishlist.length > 0 && (
-                  <span style={{ position: 'absolute', top: '-4px', right: '-8px', background: 'var(--primary-terracotta)', color: '#FFF', fontSize: '9px', fontWeight: 800, width: '15px', height: '15px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span className="nav-icon-badge-count">
                     {wishlist.length}
                   </span>
                 )}
@@ -93,10 +93,10 @@ const MainContent = () => {
             </button>
 
             <button className={`mobile-nav-item ${currentScreen === 'cart' ? 'active' : ''}`} onClick={() => setCurrentScreen('cart')}>
-              <div style={{ position: 'relative' }}>
+              <div className="nav-icon-badge-wrapper">
                 <ShoppingBag size={20} />
                 {kit.length > 0 && (
-                  <span style={{ position: 'absolute', top: '-4px', right: '-8px', background: 'var(--primary-terracotta)', color: '#FFF', fontSize: '9px', fontWeight: 800, width: '15px', height: '15px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span className="nav-icon-badge-count">
                     {kit.length}
                   </span>
                 )}
@@ -123,7 +123,7 @@ const MainContent = () => {
   return (
     <div className="web-viewport">
       <Navbar />
-      <main style={{ marginTop: '16px' }}>
+      <main className="main-content">
         {renderScreen()}
       </main>
       <ProductModal />
@@ -145,8 +145,8 @@ export function App() {
                     <div>
                       🧳 <strong>Bagless App</strong> — Viaja leve. Vive com estilo. (Travel Light. Dress Right.)
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <span style={{ fontSize: '11px', color: '#E6DEC9' }}>
+                    <div className="mode-banner-controls">
+                      <span className="mode-banner-tag">
                         Ambiente: Web & Mobile Shared Architecture
                       </span>
                     </div>
