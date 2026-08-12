@@ -125,7 +125,17 @@ export const ProfileHistoryScreen = () => {
 
       {/* Past Trips Archive */}
       <div>
-        <h2 className="heading-lg" style={{ fontSize: '20px', marginBottom: '16px' }}>Histórico de Viagens Anteriores</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <h2 className="heading-lg" style={{ fontSize: '20px', margin: 0 }}>Histórico de Viagens Anteriores</h2>
+          <button
+            className="btn-primary"
+            style={{ fontSize: '12px', padding: '6px 14px' }}
+            onClick={() => setCurrentScreen('trip-history')}
+          >
+            Ver Histórico Completo & Repetir Kits <ArrowRight size={14} />
+          </button>
+        </div>
+
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {pastTrips.map((trip) => (
             <div key={trip.id} style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -142,12 +152,9 @@ export const ProfileHistoryScreen = () => {
               <button
                 className="btn-secondary"
                 style={{ fontSize: '12px', padding: '8px 14px' }}
-                onClick={() => {
-                  showToast(`Kit da viagem a ${trip.destination.split(',')[0]} pronto a re-alugar!`);
-                  setCurrentScreen('create-trip');
-                }}
+                onClick={() => setCurrentScreen('trip-history')}
               >
-                Re-alugar Kit Desta Viagem <ArrowRight size={14} />
+                Ver no Histórico <ArrowRight size={14} />
               </button>
             </div>
           ))}

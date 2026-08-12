@@ -11,7 +11,8 @@ import {
   ProfileHistoryScreen,
   BrandsScreen,
   OnboardingScreen,
-  WishlistScreen
+  WishlistScreen,
+  TripHistoryScreen
 } from './screens';
 import { Compass, ShoppingBag, Luggage, User, Award, Heart } from 'lucide-react';
 
@@ -29,6 +30,8 @@ const MainContent = () => {
         return <CatalogScreen />;
       case 'wishlist':
         return <WishlistScreen />;
+      case 'trip-history':
+        return <TripHistoryScreen />;
       case 'brands':
         return <BrandsScreen />;
       case 'cart':

@@ -6,4 +6,6 @@ export { ProfileHistoryScreen } from './ProfileHistoryScreen';
 export { BrandsScreen } from './BrandsScreen';
 export { OnboardingScreen } from './OnboardingScreen';
 export { WishlistScreen } from './WishlistScreen';
+export { TripHistoryScreen } from './TripHistoryScreen';
+
 

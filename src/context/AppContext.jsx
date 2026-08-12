@@ -73,6 +73,44 @@ export const AppProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : [];
   });
 
+  // Past Trip History State
+  const [tripHistory, setTripHistory] = useState(() => {
+    const saved = localStorage.getItem('bagless_trip_history');
+    if (saved) return JSON.parse(saved);
+    return [
+      {
+        id: 'past-trip-paris-2025',
+        destination: {
+          title: 'Paris',
+          country: 'França',
+          flag: '🇫🇷',
+          weather: { temp: '16°C', condition: 'Parcialmente Nublado', icon: '☁️' }
+        },
+        startDate: '2025-10-10',
+        endDate: '2025-10-17',
+        hotel: 'Le Meurice Hotel Paris, Rue de Rivoli',
+        totalCost: 189,
+        status: 'Concluída',
+        items: PRODUCTS.slice(0, 4).map((p) => ({ ...p, selectedSize: 'M', rentalDays: 7 }))
+      },
+      {
+        id: 'past-trip-santorini-2025',
+        destination: {
+          title: 'Santorini',
+          country: 'Grécia',
+          flag: '🇬🇷',
+          weather: { temp: '27°C', condition: 'Ensolarado', icon: '☀️' }
+        },
+        startDate: '2025-07-01',
+        endDate: '2025-07-08',
+        hotel: 'Grace Hotel Santorini, Imerovigli',
+        totalCost: 245,
+        status: 'Concluída',
+        items: PRODUCTS.slice(4, 8).map((p) => ({ ...p, selectedSize: 'S', rentalDays: 7 }))
+      }
+    ];
+  });
+
   // Selected item modal & Buy item modal states
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [buyingProduct, setBuyingProduct] = useState(null);
@@ -105,6 +143,20 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('bagless_favorites', JSON.stringify(favorites));
   }, [favorites]);
+
+  useEffect(() => {
+    localStorage.setItem('bagless_trip_history', JSON.stringify(tripHistory));
+  }, [tripHistory]);
+
+  // Repeat past trip kit
+  const repeatTripKit = (pastTrip) => {
+    const clonedItems = pastTrip.items.map((item) => ({
+      ...item,
+      rentalDays: calculateTripDays()
+    }));
+    setKit(clonedItems);
+    setCurrentScreen('cart');
+  };
 
   // Add item to trip kit
   const addToKit = (product, size = 'M') => {
@@ -172,6 +224,20 @@ export const AppProvider = ({ children }) => {
       returnDate: currentTrip.endDate,
       status: 'rented'
     }));
+
+    // Record into tripHistory as completed trip log
+    const completedRecord = {
+      id: `trip-${Date.now()}`,
+      destination: currentTrip.destination || DESTINATIONS[0],
+      startDate: currentTrip.startDate,
+      endDate: currentTrip.endDate,
+      hotel: currentTrip.deliveryAddress,
+      totalCost: kit.reduce((acc, i) => acc + i.rentalPricePerDay * days, 0),
+      status: 'Concluída',
+      items: kit
+    };
+
+    setTripHistory((prev) => [completedRecord, ...prev]);
     setActiveRentals((prev) => [...newRentals, ...prev]);
     setCurrentTrip((prev) => ({ ...prev, status: 'active' }));
     setKit([]);
@@ -219,6 +285,8 @@ export const AppProvider = ({ children }) => {
         setUser,
         currentTrip,
         setCurrentTrip,
+        tripHistory,
+        repeatTripKit,
         kit,
         addToKit,
         removeFromKit,
