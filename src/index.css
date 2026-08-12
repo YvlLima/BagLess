@@ -4,6 +4,7 @@
 
 :root {
   /* Color Tokens */
+  --bg-body-outer: #ECE7E1;
   --bg-main: #FAF8F5;
   --bg-surface: #FFFFFF;
   --bg-subtle: #F4EFEA;
@@ -52,6 +53,40 @@
   --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+[data-theme="dark"] {
+  --bg-body-outer: #0D0C0B;
+  --bg-main: #161413;
+  --bg-surface: #201D1A;
+  --bg-subtle: #2C2824;
+  --bg-card: #201D1A;
+  --border-light: #36302B;
+  --border-medium: #4D453E;
+
+  --primary-terracotta: #DC6B44;
+  --primary-terracotta-hover: #EC7C55;
+  --primary-terracotta-light: #332019;
+
+  --accent-sand: #3D352B;
+  --accent-olive: #7A966B;
+  --accent-olive-light: #1E2919;
+
+  --text-main: #F4EFEA;
+  --text-muted: #BCAEA3;
+  --text-light: #8E8177;
+  --text-inverse: #141211;
+
+  --badge-eco-bg: #1B3322;
+  --badge-eco-text: #69C980;
+  --badge-mid-bg: #162C42;
+  --badge-mid-text: #6CB3F5;
+  --badge-lux-bg: #3B2610;
+  --badge-lux-text: #F5B066;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -60,7 +95,7 @@
 
 body {
   font-family: var(--font-body);
-  background-color: #ECE7E1;
+  background-color: var(--bg-body-outer);
   color: var(--text-main);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -392,7 +427,7 @@ input, select, textarea {
   left: 0;
   right: 0;
   height: 68px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-surface);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--border-light);
   display: flex;

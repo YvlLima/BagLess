@@ -1,14 +1,16 @@
 import React from 'react';
-import { ShoppingBag, Luggage, User, Compass, Smartphone, Monitor, Award, Heart } from 'lucide-react';
+import { ShoppingBag, Luggage, User, Compass, Smartphone, Monitor, Award, Heart, Sun, Moon } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useCurrency } from '../context/CurrencyContext';
+import { useTheme } from '../context/ThemeContext';
 import { BrandLogo } from './BrandLogo';
 
 export const Navbar = () => {
   const { currentScreen, setCurrentScreen, kit, activeRentals, isMobileFrame, setIsMobileFrame } = useApp();
   const { wishlist } = useWishlist();
   const { currency, setCurrency, RATES } = useCurrency();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="header-nav">
@@ -124,8 +126,30 @@ export const Navbar = () => {
         </nav>
       )}
 
-      {/* Currency Switcher & Viewport Mode Toggle */}
+      {/* Currency Switcher, Dark Mode Toggle & Viewport Mode Toggle */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Dark / Light Mode Toggle */}
+        <button
+          onClick={toggleTheme}
+          style={{
+            background: 'var(--bg-surface)',
+            border: '1px solid var(--border-medium)',
+            borderRadius: 'var(--radius-full)',
+            padding: '7px 12px',
+            fontSize: '12px',
+            fontWeight: 700,
+            color: 'var(--text-main)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            cursor: 'pointer'
+          }}
+          title={theme === 'dark' ? 'Mudar para Modo Claro' : 'Mudar para Modo Escuro'}
+        >
+          {theme === 'dark' ? <Sun size={15} color="#F59E0B" /> : <Moon size={15} color="var(--primary-terracotta)" />}
+          <span>{theme === 'dark' ? 'Claro' : 'Escuro'}</span>
+        </button>
+
         <select
           value={currency}
           onChange={(e) => setCurrency(e.target.value)}

@@ -2,6 +2,7 @@ import React from 'react';
 import { AppProvider, useApp } from './context/AppContext';
 import { WishlistProvider, useWishlist } from './context/WishlistContext';
 import { CurrencyProvider } from './context/CurrencyContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { Navbar, ToastProvider, ProductModal } from './components';
 import {
   CatalogScreen,
@@ -128,29 +129,31 @@ const MainContent = () => {
 
 export function App() {
   return (
-    <AppProvider>
-      <WishlistProvider>
-        <CurrencyProvider>
-          <ToastProvider>
-            <div className="app-container">
-              {/* Top bar indicating current device view and switch option */}
-              <div className="mode-banner">
-                <div>
-                  🧳 <strong>Bagless App</strong> — Viaja leve. Vive com estilo. (Travel Light. Dress Right.)
+    <ThemeProvider>
+      <AppProvider>
+        <WishlistProvider>
+          <CurrencyProvider>
+            <ToastProvider>
+              <div className="app-container">
+                {/* Top bar indicating current device view and switch option */}
+                <div className="mode-banner">
+                  <div>
+                    🧳 <strong>Bagless App</strong> — Viaja leve. Vive com estilo. (Travel Light. Dress Right.)
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <span style={{ fontSize: '11px', color: '#E6DEC9' }}>
+                      Ambiente: Web & Mobile Shared Architecture
+                    </span>
+                  </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <span style={{ fontSize: '11px', color: '#E6DEC9' }}>
-                    Ambiente: Web & Mobile Shared Architecture
-                  </span>
-                </div>
-              </div>
 
-              <MainContent />
-            </div>
-          </ToastProvider>
-        </CurrencyProvider>
-      </WishlistProvider>
-    </AppProvider>
+                <MainContent />
+              </div>
+            </ToastProvider>
+          </CurrencyProvider>
+        </WishlistProvider>
+      </AppProvider>
+    </ThemeProvider>
   );
 }
 
