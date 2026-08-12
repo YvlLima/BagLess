@@ -527,6 +527,7 @@ input, select, textarea {
   border-radius: var(--radius-full);
   border: 1px solid var(--border-medium);
   background: var(--bg-surface);
+  color: var(--text-main);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -536,12 +537,15 @@ input, select, textarea {
 .chip-item:hover {
   border-color: var(--primary-terracotta);
   background: var(--primary-terracotta-light);
+  color: var(--primary-terracotta);
 }
 
 .chip-item.selected {
-  background: var(--text-main);
-  color: var(--bg-main);
-  border-color: var(--text-main);
+  background: var(--primary-terracotta);
+  color: #FFFFFF;
+  border-color: var(--primary-terracotta);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
 }
 
 /* Active Filter Chips Bar */
@@ -558,8 +562,9 @@ input, select, textarea {
 }
 
 .chip-active {
-  background: var(--text-main);
-  color: var(--bg-main);
+  background: var(--primary-terracotta-light);
+  color: var(--primary-terracotta);
+  border: 1px solid var(--primary-terracotta);
   font-size: 12px;
   font-weight: 600;
   padding: 5px 12px;
@@ -569,6 +574,11 @@ input, select, textarea {
   gap: 6px;
   cursor: pointer;
   transition: var(--transition-fast);
+}
+
+.chip-active:hover {
+  background: var(--primary-terracotta);
+  color: #FFFFFF;
 }
 
 .chip-active:hover {

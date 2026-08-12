@@ -158,7 +158,7 @@ export const CatalogScreen = () => {
             style={{
               height: '46px',
               padding: '0 20px',
-              backgroundColor: activeFiltersCount > 0 ? 'var(--text-main)' : 'var(--primary-terracotta)',
+              backgroundColor: activeFiltersCount > 0 ? 'var(--accent-olive)' : 'var(--primary-terracotta)',
               whiteSpace: 'nowrap',
               flexShrink: 0
             }}
@@ -168,7 +168,7 @@ export const CatalogScreen = () => {
             {activeFiltersCount > 0 && (
               <span
                 style={{
-                  background: 'var(--primary-terracotta)',
+                  background: 'rgba(255, 255, 255, 0.25)',
                   color: '#FFFFFF',
                   fontSize: '11px',
                   fontWeight: 800,
