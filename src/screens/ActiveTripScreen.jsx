@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, MapPin, Truck, CheckCircle2, Sparkles, XCircle, AlertTriangle, Trash2, Luggage, Compass } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { BuyItemModal, ScheduleReturnModal, useToast } from '../components';
+import { BuyItemModal, ScheduleReturnModal, useToast, ProductImagePlaceholder } from '../components';
 
 export const ActiveTripScreen = () => {
   const { activeRentals, removeFromActiveRentals, currentTrip, setBuyingProduct, boughtItems, setCurrentScreen, cancelTrip } = useApp();
@@ -172,17 +172,8 @@ export const ActiveTripScreen = () => {
                     flexDirection: 'column'
                   }}
                 >
-                  <div style={{ height: '220px', position: 'relative', background: 'var(--bg-subtle)' }}>
-                    <img
-                      src={item.image || FALLBACK_IMAGE}
-                      alt={item.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      loading="lazy"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = FALLBACK_IMAGE;
-                      }}
-                    />
+                  <div style={{ height: '220px', position: 'relative', background: '#FFFFFF', overflow: 'hidden' }}>
+                    <ProductImagePlaceholder name={item.name} brandName={item.brandName} />
                     <span className="badge-tier tier-eco" style={{ position: 'absolute', top: '10px', left: '10px' }}>
                       {item.brandName}
                     </span>

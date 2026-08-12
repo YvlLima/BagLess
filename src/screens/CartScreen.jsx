@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Trash2, ArrowRight, Truck, CreditCard, Sparkles, Shield } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useCurrency } from '../context/CurrencyContext';
-import { OrderReceiptModal, EcoImpactCard, useToast } from '../components';
+import { OrderReceiptModal, EcoImpactCard, useToast, ProductImagePlaceholder } from '../components';
 
 export const CartScreen = () => {
   const { kit, removeFromKit, currentTrip, calculateTripDays, confirmTripCheckout, setCurrentScreen, autoCurateKitForDestination } = useApp();
@@ -96,12 +96,9 @@ export const CartScreen = () => {
                   alignItems: 'center'
                 }}
               >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  style={{ width: '80px', height: '90px', objectFit: 'cover', borderRadius: 'var(--radius-sm)' }}
-                  loading="lazy"
-                />
+                <div style={{ width: '80px', height: '90px', borderRadius: 'var(--radius-sm)', overflow: 'hidden', position: 'relative', flexShrink: 0 }}>
+                  <ProductImagePlaceholder name={item.name} brandName={item.brandName} style={{ padding: '6px' }} />
+                </div>
 
                 <div style={{ flex: 1 }}>
                   <span className={`badge-tier tier-${item.tier}`} style={{ fontSize: '10px', padding: '2px 8px', marginBottom: '4px', display: 'inline-block' }}>

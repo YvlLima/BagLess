@@ -5,6 +5,7 @@ export { EcoImpactCard } from './EcoImpactCard';
 export { HygieneCertificateModal } from './HygieneCertificateModal';
 export { Navbar } from './Navbar';
 export { OrderReceiptModal } from './OrderReceiptModal';
+export { ProductImagePlaceholder } from './ProductImagePlaceholder';
 export { ProductCard } from './ProductCard';
 export { ProductModal } from './ProductModal';
 export { ReviewCard } from './ReviewCard';

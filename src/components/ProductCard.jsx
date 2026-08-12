@@ -4,6 +4,7 @@ import { useApp } from '../context/AppContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useToast } from './ToastNotification';
+import { ProductImagePlaceholder } from './ProductImagePlaceholder';
 
 export const ProductCard = ({ product }) => {
   const { kit, addToKit, removeFromKit, setSelectedProduct } = useApp();
@@ -56,7 +57,7 @@ export const ProductCard = ({ product }) => {
     <div className="card-product">
       {/* Product Image */}
       <div className="product-img-wrapper" onClick={() => setSelectedProduct(product)} style={{ cursor: 'pointer' }}>
-        <img src={product.image} alt={product.name} className="product-img" loading="lazy" />
+        <ProductImagePlaceholder name={product.name} brandName={product.brandName} />
 
         {/* Brand Tier Badge */}
         <div style={{ position: 'absolute', top: '10px', left: '10px', display: 'flex', gap: '4px', flexDirection: 'column' }}>

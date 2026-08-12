@@ -5,6 +5,7 @@ import { SizeFitGuideModal } from './SizeFitGuideModal';
 import { HygieneCertificateModal } from './HygieneCertificateModal';
 import { ReviewCard } from './ReviewCard';
 import { useToast } from './ToastNotification';
+import { ProductImagePlaceholder } from './ProductImagePlaceholder';
 
 export const ProductModal = () => {
   const { selectedProduct, setSelectedProduct, addToKit, removeFromKit, kit, calculateTripDays, user } = useApp();
@@ -124,13 +125,8 @@ export const ProductModal = () => {
         {activeTab === 'details' ? (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
             {/* Product Image */}
-            <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', background: 'var(--bg-subtle)' }}>
-              <img
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                loading="lazy"
-              />
+            <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', background: '#FFFFFF', minHeight: '260px', position: 'relative' }}>
+              <ProductImagePlaceholder name={selectedProduct.name} brandName={selectedProduct.brandName} />
             </div>
 
             {/* Product Details */}

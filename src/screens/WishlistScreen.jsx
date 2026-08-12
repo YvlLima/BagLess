@@ -4,6 +4,7 @@ import { useWishlist } from '../context/WishlistContext';
 import { useApp } from '../context/AppContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useToast } from '../components/ToastNotification';
+import { ProductImagePlaceholder } from '../components/ProductImagePlaceholder';
 
 export const WishlistScreen = () => {
   const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
@@ -101,7 +102,7 @@ export const WishlistScreen = () => {
                 onClick={() => setSelectedProduct(product)}
                 style={{ cursor: 'pointer' }}
               >
-                <img src={product.image} alt={product.name} className="product-img" loading="lazy" />
+                <ProductImagePlaceholder name={product.name} brandName={product.brandName} />
 
                 {/* Remove from wishlist button */}
                 <button

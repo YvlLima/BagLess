@@ -3,6 +3,7 @@ import { Calendar, MapPin, Repeat, CheckCircle2, ChevronRight, ShoppingBag, Star
 import { useApp } from '../context/AppContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useToast } from '../components/ToastNotification';
+import { ProductImagePlaceholder } from '../components/ProductImagePlaceholder';
 
 export const TripHistoryScreen = () => {
   const { tripHistory, repeatTripKit, setCurrentScreen, setSelectedProduct } = useApp();
@@ -163,11 +164,9 @@ export const TripHistoryScreen = () => {
                       transition: 'transform 0.15s ease'
                     }}
                   >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      style={{ width: '48px', height: '48px', objectFit: 'cover', borderRadius: 'var(--radius-sm)' }}
-                    />
+                    <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-sm)', overflow: 'hidden', position: 'relative', flexShrink: 0 }}>
+                      <ProductImagePlaceholder name={item.name} brandName={item.brandName} style={{ padding: '4px' }} />
+                    </div>
                     <div style={{ overflow: 'hidden' }}>
                       <div style={{ fontSize: '10px', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
                         {item.brandName}
