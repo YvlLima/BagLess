@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Star, CheckCircle2 } from 'lucide-react';
 
 export const ReviewCard = ({ review }) => {
   const getFitBadgeStyle = (fit) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, MapPin, Repeat, CheckCircle2, ChevronRight, ShoppingBag, Star } from 'lucide-react';
+import { Calendar, MapPin, Repeat, CheckCircle2 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useToast } from '../components/ToastNotification';

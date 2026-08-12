@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trash2, ArrowRight, Truck, CreditCard, Sparkles, Shield, Info, ChevronRight, Check } from 'lucide-react';
+import { Trash2, ArrowRight, Truck, Sparkles, Shield, Info, ChevronRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { usePayment } from '../context/PaymentContext';

@@ -1,4 +1,3 @@
-import { BRANDS } from './brands';
 import { importProductImages, FALLBACK_IMAGE } from './catalogGenerator';
 
 /**

@@ -314,6 +314,16 @@ export const ActiveTripScreen = () => {
           </div>
         </div>
       )}
+
+      {/* Schedule Return Modal */}
+      <ScheduleReturnModal
+        isOpen={isReturnModalOpen}
+        onClose={() => setIsReturnModalOpen(false)}
+        onConfirmPickup={(details) => setScheduledDetails(details)}
+      />
+
+      {/* Buy Rented Item Modal */}
+      <BuyItemModal />
     </div>
   );
 };

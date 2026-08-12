@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Plus, Trash2, ShoppingBag, ArrowRight, Check, Compass } from 'lucide-react';
+import { Heart, Plus, Trash2, ShoppingBag, Check, Compass } from 'lucide-react';
 import { useWishlist } from '../context/WishlistContext';
 import { useApp } from '../context/AppContext';
 import { useCurrency } from '../context/CurrencyContext';

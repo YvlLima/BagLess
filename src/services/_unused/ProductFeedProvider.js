@@ -1,4 +1,12 @@
 /**
+ * RESERVADO PARA INTEGRAÇÃO FUTURA COM PARCEIROS (Zalando / ASOS / Rakuten / Awin / eBay)
+ * --------------------------------------------------------------------------------------
+ * Este ficheiro define a arquitetura de adaptadores de feeds de produtos parceiros.
+ * Atualmente não está em uso no runtime do Bagless, estando guardado para ser ligado
+ * quando as chaves de API e parcerias de afiliados forem ativadas na produção.
+ */
+
+/**
  * Bagless Legal Affiliate & Partner Product Feed Provider Architecture
  * Standardized adapter layer supporting Zalando Partner API, ASOS Affiliate API,
  * Rakuten/Awin Luxury Feeds, and eBay Browse API.
@@ -207,7 +215,6 @@ export class MockAffiliateFeedProvider extends ProductFeedProvider {
 
 // Factory function to get active feed provider
 export const getActiveFeedProvider = () => {
-  // Can be switched to ZalandoPartnerAdapter / AsosPartnerAdapter when production keys arrive
   const apiKey = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_ZALANDO_PARTNER_KEY)
     ? import.meta.env.VITE_ZALANDO_PARTNER_KEY
     : 'sandbox_key';

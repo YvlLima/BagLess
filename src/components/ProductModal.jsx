@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Check, ShoppingBag, ShieldCheck, Ruler, Award, Star, MessageSquare, Plus, ThumbsUp } from 'lucide-react';
+import { X, Check, ShoppingBag, ShieldCheck, Ruler, Award, Star, MessageSquare, ThumbsUp } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { SizeFitGuideModal } from './SizeFitGuideModal';
 import { HygieneCertificateModal } from './HygieneCertificateModal';
