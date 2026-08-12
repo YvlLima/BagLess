@@ -7,7 +7,7 @@ import { useToast } from '../components/ToastNotification';
 
 export const WishlistScreen = () => {
   const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
-  const { kit, addToKit, setCurrentScreen, setSelectedProduct } = useApp();
+  const { kit, addToKit, removeFromKit, setCurrentScreen, setSelectedProduct } = useApp();
   const { formatPrice } = useCurrency();
   const { showToast } = useToast();
 
@@ -154,15 +154,24 @@ export const WishlistScreen = () => {
 
                   <button
                     onClick={() => {
-                      addToKit(product, product.sizes ? product.sizes[0] : 'M');
-                      showToast(`${product.name} adicionado ao Kit!`, 'success');
+                      const defaultSize = product.sizes ? product.sizes[0] : 'M';
+                      if (isInKit) {
+                        removeFromKit(product.id, defaultSize);
+                        showToast(`"${product.name}" removido do Kit.`, 'info');
+                      } else {
+                        addToKit(product, defaultSize);
+                        showToast(`"${product.name}" adicionado ao Kit!`, 'success');
+                      }
                     }}
                     className="btn-primary"
                     style={{
                       padding: '8px 14px',
                       fontSize: '13px',
-                      backgroundColor: isInKit ? 'var(--accent-olive)' : 'var(--primary-terracotta)'
+                      backgroundColor: isInKit ? 'var(--accent-olive)' : 'var(--primary-terracotta)',
+                      cursor: 'pointer',
+                      transition: 'var(--transition-fast)'
                     }}
+                    title={isInKit ? 'Clique para remover do Kit' : 'Clique para alugar e adicionar ao Kit'}
                   >
                     {isInKit ? (
                       <>

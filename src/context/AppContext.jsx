@@ -169,7 +169,12 @@ export const AppProvider = ({ children }) => {
 
   // Remove item from trip kit
   const removeFromKit = (productId, size) => {
-    setKit((prev) => prev.filter((item) => !(item.id === productId && item.selectedSize === size)));
+    setKit((prev) => prev.filter((item) => {
+      if (size) {
+        return !(item.id === productId && item.selectedSize === size);
+      }
+      return item.id !== productId;
+    }));
   };
 
   // Auto-Curate Kit via AI for Destination

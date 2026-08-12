@@ -3,14 +3,28 @@ import { Heart, Plus, Check, ShieldCheck } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useCurrency } from '../context/CurrencyContext';
+import { useToast } from './ToastNotification';
 
 export const ProductCard = ({ product }) => {
-  const { kit, addToKit, setSelectedProduct } = useApp();
+  const { kit, addToKit, removeFromKit, setSelectedProduct } = useApp();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { formatPrice } = useCurrency();
+  const { showToast } = useToast();
 
   const isFavorite = isInWishlist(product.id);
   const isInKit = kit.some((item) => item.id === product.id);
+  const defaultSize = product.sizes ? product.sizes[0] : 'M';
+
+  const handleToggleKit = (e) => {
+    e.stopPropagation();
+    if (isInKit) {
+      removeFromKit(product.id);
+      showToast(`"${product.name}" removido do Kit.`, 'info');
+    } else {
+      addToKit(product, defaultSize);
+      showToast(`"${product.name}" adicionado ao Kit!`, 'success');
+    }
+  };
 
   const getTierClass = (tier) => {
     switch (tier) {
@@ -61,7 +75,7 @@ export const ProductCard = ({ product }) => {
             position: 'absolute',
             top: '10px',
             right: '10px',
-            background: 'rgba(255, 255, 255, 0.85)',
+            background: 'var(--bg-surface)',
             backdropFilter: 'blur(4px)',
             borderRadius: '50%',
             width: '32px',
@@ -69,7 +83,7 @@ export const ProductCard = ({ product }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: isFavorite ? '#C85A32' : '#6B625B'
+            color: isFavorite ? '#C85A32' : 'var(--text-muted)'
           }}
         >
           <Heart size={16} fill={isFavorite ? '#C85A32' : 'none'} />
@@ -121,13 +135,16 @@ export const ProductCard = ({ product }) => {
           </div>
 
           <button
-            onClick={() => addToKit(product, product.sizes ? product.sizes[0] : 'M')}
+            onClick={handleToggleKit}
             className="btn-primary"
             style={{
               padding: '8px 14px',
               fontSize: '13px',
-              backgroundColor: isInKit ? 'var(--accent-olive)' : 'var(--primary-terracotta)'
+              backgroundColor: isInKit ? 'var(--accent-olive)' : 'var(--primary-terracotta)',
+              cursor: 'pointer',
+              transition: 'var(--transition-fast)'
             }}
+            title={isInKit ? 'Clique para remover do Kit' : 'Clique para alugar e adicionar ao Kit'}
           >
             {isInKit ? (
               <>

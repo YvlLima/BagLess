@@ -7,7 +7,7 @@ import { ReviewCard } from './ReviewCard';
 import { useToast } from './ToastNotification';
 
 export const ProductModal = () => {
-  const { selectedProduct, setSelectedProduct, addToKit, kit, calculateTripDays, user } = useApp();
+  const { selectedProduct, setSelectedProduct, addToKit, removeFromKit, kit, calculateTripDays, user } = useApp();
   const { showToast } = useToast();
 
   const [selectedSize, setSelectedSize] = useState(selectedProduct?.sizes ? selectedProduct.sizes[0] : 'M');
@@ -233,14 +233,20 @@ export const ProductModal = () => {
 
                 <button
                   onClick={() => {
-                    addToKit(selectedProduct, selectedSize);
-                    setSelectedProduct(null);
+                    if (isInKit) {
+                      removeFromKit(selectedProduct.id, selectedSize);
+                      showToast(`"${selectedProduct.name}" removido do Kit.`, 'info');
+                    } else {
+                      addToKit(selectedProduct, selectedSize);
+                      showToast(`"${selectedProduct.name}" adicionado ao Kit!`, 'success');
+                      setSelectedProduct(null);
+                    }
                   }}
                   className="btn-primary"
-                  style={{ width: '100%', backgroundColor: isInKit ? 'var(--accent-olive)' : 'var(--primary-terracotta)' }}
+                  style={{ width: '100%', backgroundColor: isInKit ? 'var(--accent-olive)' : 'var(--primary-terracotta)', cursor: 'pointer' }}
                 >
                   {isInKit ? <Check size={18} /> : <ShoppingBag size={18} />}
-                  {isInKit ? 'No teu Kit de Viagem' : 'Adicionar ao Kit de Viagem'}
+                  {isInKit ? 'Remover do Kit de Viagem' : 'Adicionar ao Kit de Viagem'}
                 </button>
               </div>
             </div>
