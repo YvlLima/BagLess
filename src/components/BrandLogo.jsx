@@ -2,7 +2,7 @@ import React from 'react';
 
 export const BrandLogo = ({ size = 'medium', dark = false }) => {
   const isLarge = size === 'large';
-  const textColor = dark ? '#FFFFFF' : '#2C2623';
+  const textColor = dark ? '#FFFFFF' : 'var(--text-main)';
   const accentColor = '#C85A32';
 
   return (
@@ -62,7 +62,7 @@ export const BrandLogo = ({ size = 'medium', dark = false }) => {
           <span
             style={{
               fontSize: '11px',
-              color: dark ? '#E6DEC9' : '#6B625B',
+              color: dark ? '#E6DEC9' : 'var(--text-muted)',
               letterSpacing: '0.05em',
               textTransform: 'uppercase',
               fontWeight: 600,

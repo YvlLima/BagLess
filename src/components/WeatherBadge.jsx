@@ -10,7 +10,7 @@ export const WeatherBadge = ({ destination }) => {
     <div
       style={{
         background: 'var(--accent-olive-light)',
-        border: '1px solid #D2E0CD',
+        border: '1px solid var(--border-light)',
         borderRadius: 'var(--radius-md)',
         padding: '12px 16px',
         display: 'flex',
@@ -24,7 +24,7 @@ export const WeatherBadge = ({ destination }) => {
           width: '36px',
           height: '36px',
           borderRadius: '50%',
-          background: '#5B6E50',
+          background: 'var(--accent-olive)',
           color: '#FFFFFF',
           display: 'flex',
           alignItems: 'center',
@@ -36,11 +36,11 @@ export const WeatherBadge = ({ destination }) => {
       </div>
 
       <div style={{ flex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 700, color: '#32422C' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>
           <span>{destination.flag} {destination.name}</span>
-          <span style={{ color: '#5B6E50', fontWeight: 600 }}>• {temp} ({condition})</span>
+          <span style={{ color: 'var(--accent-olive)', fontWeight: 600 }}>• {temp} ({condition})</span>
         </div>
-        <div style={{ fontSize: '12px', color: '#526348', marginTop: '2px' }}>
+        <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
           💡 <strong>Recomendação AI Bagless:</strong> {recommendedFabric}
         </div>
       </div>
