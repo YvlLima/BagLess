@@ -3811,9 +3811,43 @@ const RAW_PRODUCTS = [
   }
 ];
 
-export const PRODUCTS = RAW_PRODUCTS.map((item) => {
+export const PRODUCTS = RAW_PRODUCTS.map((item, index) => {
   const finalPrice = item.price || item.fullPurchasePrice || 50;
   const rentalPricePerDay = Math.max(3, Math.round(finalPrice / 25));
+
+  const sampleAuthors = ['Ana S.', 'Miguel R.', 'Beatriz P.', 'Tiago C.', 'Inês M.', 'Diogo F.', 'Carolina T.', 'João V.'];
+  const sampleFitRatings = ['veste conforme o tamanho', 'veste conforme o tamanho', 'veste conforme o tamanho', 'veste mais pequeno', 'veste maior'];
+  const sampleComments = [
+    'Excelente caimento! Chegou ao hotel devidamente higienizado e embalado em proteção hospitalar.',
+    'Peça impecável para o clima do meu destino. Muito elegante e super confortável.',
+    'Caimento perfeito e linho de elevadíssima qualidade. Recomendo imenso para quem quer viajar leve!',
+    'Adorei a experiência Bagless. A peça serviu exatamente como indicado na guia de tamanhos.',
+    'Entrega pontualíssima na receção do resort. A qualidade da marca é topo!'
+  ];
+
+  const rating = 4.5 + ((index % 5) * 0.1);
+  const fitRating = sampleFitRatings[index % sampleFitRatings.length];
+
+  const initialReviews = [
+    {
+      id: `rev-${item.id}-1`,
+      author: sampleAuthors[index % sampleAuthors.length],
+      date: '2026-07-28',
+      rating: 5,
+      fitRating: fitRating,
+      comment: sampleComments[index % sampleComments.length],
+      verifiedTrip: true
+    },
+    {
+      id: `rev-${item.id}-2`,
+      author: sampleAuthors[(index + 2) % sampleAuthors.length],
+      date: '2026-06-14',
+      rating: Math.min(5, Math.floor(rating)),
+      fitRating: 'veste conforme o tamanho',
+      comment: 'Peça exatamente idêntica às fotos. O serviço de lavagem sanitizada UV-C dá total confiança!',
+      verifiedTrip: true
+    }
+  ];
 
   return {
     ...item,
@@ -3827,7 +3861,10 @@ export const PRODUCTS = RAW_PRODUCTS.map((item) => {
     discontinued: false,
     merchantAttribution: `${item.brandName} Partner Network`,
     affiliateUrl: `https://partner.bagless.app/redirect?brand=${item.brandId}&id=${item.id}`,
-    weatherTag: item.occasion === 'praia' ? 'Clima Quente' : item.occasion === 'desporto' ? 'Desporto & Aventura' : 'Urbano & Elegante'
+    weatherTag: item.occasion === 'praia' ? 'Clima Quente' : item.occasion === 'desporto' ? 'Desporto & Aventura' : 'Urbano & Elegante',
+    rating: Number(rating.toFixed(1)),
+    reviewsCount: initialReviews.length,
+    reviews: initialReviews
   };
 }).sort((a, b) => {
   const catComp = a.category.localeCompare(b.category);
