@@ -98,40 +98,40 @@ export const CreateTripScreen = () => {
       </div>
 
       {/* Worldwide Destination Search Bar with Live Autocomplete */}
-      <div className="form-group mb-7 relative">
+      <div className="form-group mb-7">
         <label className="form-label flex items-center gap-1.5 text-base">
           <Globe size={18} color="var(--primary-terracotta)" /> Pesquisar Qualquer Cidade ou País do Mundo:
         </label>
         
-        <div className="relative">
-          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-light" />
+        <div className="search-input-wrapper">
+          <Search size={18} className="search-icon-left" />
           <input
             type="text"
-            className="form-input pl-11 pr-10 text-base h-12"
+            className="form-input search-input-field"
             placeholder="Escreve uma cidade (ex: Budapeste, Nova Iorque, Dubai, Bali, Londres, Paris, Tóquio, Roma...)"
             value={searchLocation}
             onChange={(e) => setSearchLocation(e.target.value)}
           />
           {isSearching && (
-            <Loader2 size={18} className="spin absolute right-4 top-1/2 -translate-y-1/2 text-terracotta" />
+            <Loader2 size={18} className="spin search-icon-right" />
+          )}
+
+          {/* Autocomplete Dropdown List */}
+          {suggestions.length > 0 && (
+            <div className="autocomplete-dropdown">
+              {suggestions.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => handleSelectSuggestion(item)}
+                  className="autocomplete-item"
+                >
+                  <MapPin size={16} color="var(--primary-terracotta)" />
+                  <span className="font-semibold">{item.displayName}</span>
+                </div>
+              ))}
+            </div>
           )}
         </div>
-
-        {/* Autocomplete Dropdown List */}
-        {suggestions.length > 0 && (
-          <div className="autocomplete-dropdown">
-            {suggestions.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => handleSelectSuggestion(item)}
-                className="autocomplete-item"
-              >
-                <MapPin size={16} color="var(--primary-terracotta)" />
-                <span className="font-semibold">{item.displayName}</span>
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* Error message handling */}
         {searchError && (

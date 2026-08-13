@@ -142,6 +142,12 @@ export const fetchGlobalGeoLocation = async (query) => {
     { name: 'Coimbra', country: 'Portugal', flag: '🇵🇹', lat: 40.2033, lon: -8.4103 },
     { name: 'Funchal (Madeira)', country: 'Portugal', flag: '🇵🇹', lat: 32.6669, lon: -16.9241 },
     { name: 'Ponta Delgada (Açores)', country: 'Portugal', flag: '🇵🇹', lat: 37.7412, lon: -25.6756 },
+    { name: 'Viana do Castelo', country: 'Portugal', flag: '🇵🇹', lat: 41.6918, lon: -8.8344 },
+    { name: 'Aveiro', country: 'Portugal', flag: '🇵🇹', lat: 40.6405, lon: -8.6538 },
+    { name: 'Viseu', country: 'Portugal', flag: '🇵🇹', lat: 40.6566, lon: -7.9125 },
+    { name: 'Évora', country: 'Portugal', flag: '🇵🇹', lat: 38.5714, lon: -7.9070 },
+    { name: 'Cascais', country: 'Portugal', flag: '🇵🇹', lat: 38.6979, lon: -9.4215 },
+    { name: 'Sintra', country: 'Portugal', flag: '🇵🇹', lat: 38.8029, lon: -9.3817 },
     { name: 'Madrid', country: 'Espanha', flag: '🇪🇸', lat: 40.4168, lon: -3.7038 },
     { name: 'Barcelona', country: 'Espanha', flag: '🇪🇸', lat: 41.3879, lon: 2.1699 },
     { name: 'Londres', country: 'Reino Unido', flag: '🇬🇧', lat: 51.5074, lon: -0.1278 },
@@ -168,9 +174,14 @@ export const fetchGlobalGeoLocation = async (query) => {
   }));
 
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000);
+
     const response = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`,
+      { signal: controller.signal }
     );
+    clearTimeout(timeoutId);
 
     if (response.ok) {
       const data = await response.json();
@@ -197,7 +208,7 @@ export const fetchGlobalGeoLocation = async (query) => {
       return combined;
     }
   } catch (err) {
-    console.warn('Geocoding search warning:', err);
+    // Network or abort timeout, fall through to returning localMatches
   }
 
   return localMatches;
