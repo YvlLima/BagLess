@@ -11,7 +11,7 @@
   --bg-card: #FFFFFF;
   --border-light: #E8E2D9;
   --border-medium: #D6CBC0;
-  
+
   --primary-terracotta: #C85A32;
   --primary-terracotta-hover: #B04924;
   --primary-terracotta-light: #FDF3EF;
@@ -109,7 +109,9 @@ button {
   background: none;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   font-family: inherit;
 }
 
@@ -162,7 +164,7 @@ input, select, textarea {
   padding: 24px 32px 64px 32px;
   background-color: var(--bg-main);
   min-height: calc(100vh - 46px);
-  box-shadow: 0 0 40px rgba(0,0,0,0.05);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
 }
 
 .mobile-frame-wrapper {
@@ -241,7 +243,8 @@ input, select, textarea {
   align-items: center;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--primary-terracotta);
   background-color: var(--primary-terracotta-light);
 }
@@ -378,9 +381,20 @@ input, select, textarea {
   border-radius: var(--radius-full);
 }
 
-.tier-eco { background: var(--badge-eco-bg); color: var(--badge-eco-text); }
-.tier-mid { background: var(--badge-mid-bg); color: var(--badge-mid-text); }
-.tier-lux { background: var(--badge-lux-bg); color: var(--badge-lux-text); }
+.tier-eco {
+  background: var(--badge-eco-bg);
+  color: var(--badge-eco-text);
+}
+
+.tier-mid {
+  background: var(--badge-mid-bg);
+  color: var(--badge-mid-text);
+}
+
+.tier-lux {
+  background: var(--badge-lux-bg);
+  color: var(--badge-lux-text);
+}
 
 .badge-weather {
   background: var(--accent-olive-light);
@@ -498,7 +512,8 @@ input, select, textarea {
   color: var(--text-main);
 }
 
-.form-input, .form-select {
+.form-input,
+.form-select {
   width: 100%;
   padding: 10px 14px;
   border: 1px solid var(--border-medium);
@@ -509,7 +524,8 @@ input, select, textarea {
   transition: var(--transition-fast);
 }
 
-.form-input:focus, .form-select:focus {
+.form-input:focus,
+.form-select:focus {
   outline: none;
   border-color: var(--primary-terracotta);
   box-shadow: 0 0 0 3px var(--primary-terracotta-light);
@@ -645,6 +661,7 @@ input, select, textarea {
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -1416,7 +1433,7 @@ input, select, textarea {
 /* AppIcon Class */
 .app-icon-container {
   background: linear-gradient(135deg, #FAF8F5 0%, #E6DEC9 100%);
-  box-shadow: 0 8px 20px rgba(44, 38, 35, 0.12), inset 0 1px 1px rgba(255,255,255,0.8);
+  box-shadow: 0 8px 20px rgba(44, 38, 35, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1763,7 +1780,7 @@ input, select, textarea {
   padding: 12px 18px;
   border-radius: var(--radius-md);
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .btn-cancel-trip {
@@ -2026,6 +2043,7 @@ input, select, textarea {
   line-height: 1.35;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 32px;
@@ -2107,17 +2125,3 @@ input, select, textarea {
 .autocomplete-item .font-semibold {
   font-weight: 600;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
