@@ -158,18 +158,18 @@ export const CreateTripScreen = () => {
                 }}
                 className={`popular-dest-card ${isSelected ? 'selected' : ''}`}
               >
-                <div className="h-24 bg-gray-300 relative">
-                  <img src={d.coverImage} alt={d.name} className="w-full h-full object-cover" />
-                  <span className="absolute top-2 left-2 text-xl">{d.flag}</span>
+                <div className="popular-dest-card-img-wrapper">
+                  <img src={d.coverImage} alt={d.name} className="popular-dest-card-img" />
+                  <span className="popular-dest-card-flag">{d.flag}</span>
                   {isSelected && (
-                    <div className="absolute top-2 right-2 bg-terracotta text-white rounded-full p-1">
+                    <div className="popular-dest-card-check">
                       <Check size={14} />
                     </div>
                   )}
                 </div>
-                <div className="p-2.5">
-                  <div className="text-xs font-bold">{d.name}</div>
-                  <div className="text-xs text-muted">{d.weather.temp} • {d.weather.condition}</div>
+                <div className="popular-dest-card-info">
+                  <div className="popular-dest-card-name">{d.name}</div>
+                  <div className="popular-dest-card-weather">{d.weather.temp} • {d.weather.condition}</div>
                 </div>
               </div>
             );

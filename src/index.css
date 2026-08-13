@@ -1891,6 +1891,112 @@ input, select, textarea {
   box-shadow: var(--shadow-xs);
 }
 
+/* Popular Destinations Grid (CreateTripScreen) */
+.popular-dest-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .popular-dest-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 550px) {
+  .popular-dest-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.popular-dest-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+}
+
+.popular-dest-card:hover {
+  border-color: var(--border-medium);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.popular-dest-card.selected {
+  border: 2px solid var(--primary-terracotta);
+  background: var(--primary-terracotta-light);
+}
+
+.popular-dest-card-img-wrapper {
+  height: 96px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-subtle);
+}
+
+.popular-dest-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.popular-dest-card-flag {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-size: 18px;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.popular-dest-card-check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--primary-terracotta);
+  color: #ffffff;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popular-dest-card-info {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.popular-dest-card-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.popular-dest-card-weather {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+
 
 
 
