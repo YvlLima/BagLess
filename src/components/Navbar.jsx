@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingBag, Luggage, User, Compass, Smartphone, Monitor, Award, Heart, Sun, Moon } from 'lucide-react';
+import { ShoppingBag, Luggage, User, Compass, Smartphone, Monitor, Award, Heart, Sun, Moon, Crown } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useCurrency } from '../context/CurrencyContext';
@@ -43,6 +43,18 @@ export const Navbar = () => {
           >
             <Award size={16} className="nav-icon-inline" />
             Marcas
+          </button>
+
+          <button
+            className={`nav-link ${currentScreen === 'vip-club' ? 'active' : ''}`}
+            onClick={() => setCurrentScreen('vip-club')}
+            style={{
+              color: currentScreen === 'vip-club' ? 'var(--primary-terracotta)' : undefined,
+              fontWeight: 700
+            }}
+          >
+            <Crown size={16} className="nav-icon-inline" color="var(--primary-terracotta)" />
+            Clube VIP
           </button>
 
           <button

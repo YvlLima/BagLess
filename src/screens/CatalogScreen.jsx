@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Compass, X, ArrowDown, SlidersHorizontal, Award, RotateCcw, Check } from 'lucide-react';
+import { Search, Compass, X, ArrowDown, SlidersHorizontal, Award, RotateCcw, Check, Gift } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { PRODUCTS } from '../mockData/products';
 import { BRANDS } from '../mockData/brands';
@@ -95,7 +95,7 @@ export const CatalogScreen = () => {
   return (
     <div>
       {/* Hero Banner */}
-      <div className="hero-banner" style={{ padding: '32px', marginBottom: '24px' }}>
+      <div className="hero-banner" style={{ padding: '32px', marginBottom: '16px' }}>
         <div>
           <span className="slogan-tag">Bagless Wardrobe Rental</span>
           <h1 className="heading-xl" style={{ fontSize: '28px', marginBottom: '6px' }}>
@@ -118,6 +118,43 @@ export const CatalogScreen = () => {
             • Devolução no Hotel ou Opção de Compra
           </div>
         </div>
+      </div>
+
+      {/* Free Welcome Essential Kit Promo Banner */}
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)',
+          border: '1px solid #F59E0B',
+          borderRadius: 'var(--radius-lg)',
+          padding: '14px 20px',
+          marginBottom: '20px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          boxShadow: 'var(--shadow-sm)'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#D97706', flexShrink: 0 }}>
+            <Gift size={20} />
+          </div>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: '13px', color: '#92400E', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              🎁 Oferta de Abertura Bagless: Kit Básico Essencial + Necessaire 100% Grátis!
+            </div>
+            <div style={{ fontSize: '12px', color: '#B45309', marginTop: '1px' }}>
+              A tua 1ª peça básica no Kit fica a 0.00€ + Pack de Higiene Ecológica de Cortesia incluído.
+            </div>
+          </div>
+        </div>
+
+        <button
+          className="btn-primary"
+          onClick={() => setCurrentScreen('cart')}
+          style={{ fontSize: '12px', padding: '8px 16px', backgroundColor: '#D97706', borderColor: '#D97706', whiteSpace: 'nowrap' }}
+        >
+          Ver o teu Kit (0€)
+        </button>
       </div>
 
       {/* COMPACT & CLEAN MAIN FILTER BAR (Always Visible) */}
@@ -187,7 +224,30 @@ export const CatalogScreen = () => {
           </button>
         </div>
 
-        {/* Bottom Row: Category Pills (Clean & Essential) */}
+        {/* Gender Filter Row (Masculino / Feminino / Unissex) */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center', paddingTop: '4px', borderTop: '1px solid var(--border-light)' }}>
+          <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-muted)', marginRight: '4px' }}>Género:</span>
+          {[
+            { id: 'all', label: 'Todos' },
+            { id: 'masculino', label: '👨 Masculino' },
+            { id: 'feminino', label: '👩 Feminino' },
+            { id: 'unissex', label: '⚧ Unissex' }
+          ].map((g) => (
+            <button
+              key={g.id}
+              onClick={() => {
+                setSelectedGender(g.id);
+                setVisibleCount(12);
+              }}
+              className={`chip-item ${selectedGender === g.id ? 'selected' : ''}`}
+              style={{ fontSize: '13px', padding: '6px 14px' }}
+            >
+              {g.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Category Pills (Clean & Essential) */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center', paddingTop: '4px', borderTop: '1px solid var(--border-light)' }}>
           <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-muted)', marginRight: '4px' }}>Categoria:</span>
           {[
@@ -220,6 +280,12 @@ export const CatalogScreen = () => {
           <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-muted)', marginRight: '4px' }}>
             Filtros Ativos:
           </span>
+
+          {selectedGender !== 'all' && (
+            <span className="chip-active" onClick={() => setSelectedGender('all')}>
+              Género: {selectedGender === 'masculino' ? 'Masculino' : selectedGender === 'feminino' ? 'Feminino' : 'Unissex'} <X size={12} />
+            </span>
+          )}
 
           {selectedCategory !== 'all' && (
             <span className="chip-active" onClick={() => setSelectedCategory('all')}>
@@ -333,7 +399,29 @@ export const CatalogScreen = () => {
 
             {/* Drawer Scrollable Body */}
             <div className="drawer-body">
-              {/* 1. Subcategory Selector */}
+              {/* 1. Gender Selector */}
+              <div className="form-group">
+                <label className="form-label">Género:</label>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  {[
+                    { id: 'all', label: 'Todos' },
+                    { id: 'masculino', label: '👨 Masculino' },
+                    { id: 'feminino', label: '👩 Feminino' },
+                    { id: 'unissex', label: '⚧ Unissex' }
+                  ].map((g) => (
+                    <button
+                      key={g.id}
+                      onClick={() => setSelectedGender(g.id)}
+                      className={`chip-item ${selectedGender === g.id ? 'selected' : ''}`}
+                      style={{ fontSize: '12px', padding: '5px 12px' }}
+                    >
+                      {g.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 2. Subcategory Selector */}
               <div className="form-group">
                 <label className="form-label">Subcategoria:</label>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>

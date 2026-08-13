@@ -48,7 +48,7 @@ export const OrderReceiptModal = ({ order, isOpen, onClose }) => {
               Apresenta este código ou o teu nome na receção do hotel para levantar o teu kit.
             </div>
             <div className="text-xs text-olive font-bold">
-              ✓ Identificador de Mala Ecológica Validade VIP
+              ✓ Identificador de Mala Ecológica • Pack Higiene Cortesia (0€) Incluído
             </div>
           </div>
         </div>

@@ -13,6 +13,8 @@ export { PaymentMethodsModal } from './PaymentMethodsModal';
 export { ScheduleReturnModal } from './ScheduleReturnModal';
 export { SizeFitGuideModal } from './SizeFitGuideModal';
 export { StyleQuizModal } from './StyleQuizModal';
+export { EditProfileModal } from './EditProfileModal';
+export { VipPassportModal } from './VipPassportModal';
 export { ToastProvider, useToast } from './ToastNotification';
 export { WeatherBadge } from './WeatherBadge';
 

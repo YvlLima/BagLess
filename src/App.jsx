@@ -15,9 +15,10 @@ import {
   OnboardingScreen,
   WishlistScreen,
   TripHistoryScreen,
-  PaymentMethodsScreen
+  PaymentMethodsScreen,
+  VipClubScreen
 } from './screens';
-import { Compass, ShoppingBag, Luggage, User, Heart } from 'lucide-react';
+import { Compass, ShoppingBag, Luggage, User, Heart, Crown } from 'lucide-react';
 
 const MainContent = () => {
   const { currentScreen, setCurrentScreen, isMobileFrame, kit } = useApp();
@@ -45,6 +46,8 @@ const MainContent = () => {
         return <ProfileHistoryScreen />;
       case 'payment-methods':
         return <PaymentMethodsScreen />;
+      case 'vip-club':
+        return <VipClubScreen />;
       default:
         return <CatalogScreen />;
     }

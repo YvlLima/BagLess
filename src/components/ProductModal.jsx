@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { X, Check, ShoppingBag, ShieldCheck, Ruler, Award, Star, MessageSquare, ThumbsUp } from 'lucide-react';
+import { X, Check, ShoppingBag, ShieldCheck, Ruler, Award, Star, MessageSquare, ThumbsUp, Crown, Gift } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { SizeFitGuideModal } from './SizeFitGuideModal';
 import { HygieneCertificateModal } from './HygieneCertificateModal';
 import { ReviewCard } from './ReviewCard';
 import { useToast } from './ToastNotification';
 import { ProductImagePlaceholder } from './ProductImagePlaceholder';
+import { getVipDetails, calculateVipDailyPrice } from '../utils/vip';
+import { isEligibleBasicItem } from '../utils/welcomeKit';
 
 export const ProductModal = () => {
   const { selectedProduct, setSelectedProduct, addToKit, removeFromKit, kit, calculateTripDays, user } = useApp();
@@ -25,9 +27,16 @@ export const ProductModal = () => {
 
   if (!selectedProduct) return null;
 
+  const vipTier = user?.vipTier || 'global';
+  const vipDetails = getVipDetails(vipTier);
+  const vipDailyPrice = calculateVipDailyPrice(selectedProduct.rentalPricePerDay, vipTier);
+  const hasVipDiscount = vipDetails.rentalDiscountPercent > 0;
+  const isBasicOfferEligible = isEligibleBasicItem(selectedProduct);
+
   const isInKit = kit.some((item) => item.id === selectedProduct.id);
   const days = calculateTripDays();
-  const totalRental = selectedProduct.rentalPricePerDay * days;
+  const baseTotalRental = selectedProduct.rentalPricePerDay * days;
+  const vipTotalRental = vipDailyPrice * days;
 
   // Fit calculations
   const totalReviews = reviewsList.length;
@@ -133,9 +142,21 @@ export const ProductModal = () => {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span className={`badge-tier tier-${selectedProduct.tier}`}>
-                    Marca {selectedProduct.tier === 'eco' ? 'Económica' : selectedProduct.tier === 'mid' ? 'Médio' : 'Luxo'}
-                  </span>
+                  <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                    <span className={`badge-tier tier-${selectedProduct.tier}`}>
+                      Marca {selectedProduct.tier === 'eco' ? 'Económica' : selectedProduct.tier === 'mid' ? 'Médio' : 'Luxo'}
+                    </span>
+                    {selectedProduct.gender && (
+                      <span className={`badge-gender badge-gender-${selectedProduct.gender}`}>
+                        {selectedProduct.gender === 'masculino' ? '👨 Masculino' : selectedProduct.gender === 'feminino' ? '👩 Feminino' : '⚧ Unissex'}
+                      </span>
+                    )}
+                    {isBasicOfferEligible && (
+                      <span style={{ background: '#D97706', color: '#FFFFFF', fontSize: '11px', fontWeight: 800, padding: '2px 8px', borderRadius: 'var(--radius-full)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                        <Gift size={12} /> Elegível p/ Oferta 0€
+                      </span>
+                    )}
+                  </div>
                   <button
                     onClick={() => setActiveTab('reviews')}
                     style={{ fontSize: '11px', color: 'var(--accent-olive)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}
@@ -214,11 +235,29 @@ export const ProductModal = () => {
               <div style={{ marginTop: '20px', borderTop: '1px solid var(--border-light)', paddingTop: '16px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '12px' }}>
                   <div>
-                    <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--primary-terracotta)' }}>
-                      {selectedProduct.rentalPricePerDay}€ <span style={{ fontSize: '12px', fontWeight: 500, color: 'var(--text-muted)' }}>/ dia</span>
+                    <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--primary-terracotta)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      {hasVipDiscount ? (
+                        <>
+                          <span>{vipDailyPrice.toFixed(2)}€</span>
+                          <span style={{ fontSize: '13px', textDecoration: 'line-through', color: 'var(--text-light)' }}>
+                            {selectedProduct.rentalPricePerDay}€
+                          </span>
+                          <span style={{ fontSize: '10px', background: 'var(--primary-terracotta-light)', color: 'var(--primary-terracotta)', padding: '2px 6px', borderRadius: 'var(--radius-full)', fontWeight: 800 }}>
+                            -{vipDetails.rentalDiscountPercent}% {vipDetails.name}
+                          </span>
+                        </>
+                      ) : (
+                        <span>{selectedProduct.rentalPricePerDay}€</span>
+                      )}
+                      <span style={{ fontSize: '12px', fontWeight: 500, color: 'var(--text-muted)' }}>/ dia</span>
                     </div>
-                    <div style={{ fontSize: '11px', color: 'var(--text-light)' }}>
-                      Total {days} dias: <strong>{totalRental}€</strong>
+                    <div style={{ fontSize: '11px', color: 'var(--text-light)', marginTop: '2px' }}>
+                      Total {days} dias: <strong>{hasVipDiscount ? vipTotalRental.toFixed(2) : baseTotalRental}€</strong>
+                      {hasVipDiscount && (
+                        <span style={{ color: 'var(--accent-olive)', fontWeight: 700, marginLeft: '6px' }}>
+                          (Poupas {(baseTotalRental - vipTotalRental).toFixed(2)}€ com VIP)
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div style={{ textAlign: 'right' }}>

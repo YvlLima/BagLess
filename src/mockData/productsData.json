@@ -12,7 +12,7 @@
     "price": 14,
     "fullPurchasePrice": 14,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "Único"
@@ -67,7 +67,7 @@
     "price": 15,
     "fullPurchasePrice": 15,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "formal",
     "sizes": [
       "Único"
@@ -122,7 +122,7 @@
     "price": 25,
     "fullPurchasePrice": 25,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "formal",
     "sizes": [
       "Único"
@@ -232,7 +232,7 @@
     "price": 45,
     "fullPurchasePrice": 45,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "Único"
@@ -287,7 +287,7 @@
     "price": 55,
     "fullPurchasePrice": 55,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "praia",
     "sizes": [
       "Único"
@@ -342,7 +342,7 @@
     "price": 75,
     "fullPurchasePrice": 75,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "cidade",
     "sizes": [
       "Único"
@@ -397,7 +397,7 @@
     "price": 120,
     "fullPurchasePrice": 120,
     "rentalPricePerDay": 5,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "praia",
     "sizes": [
       "Único"
@@ -452,7 +452,7 @@
     "price": 150,
     "fullPurchasePrice": 150,
     "rentalPricePerDay": 6,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "cidade",
     "sizes": [
       "Único"
@@ -562,7 +562,7 @@
     "price": 275,
     "fullPurchasePrice": 275,
     "rentalPricePerDay": 11,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "formal",
     "sizes": [
       "Único"
@@ -617,7 +617,7 @@
     "price": 320,
     "fullPurchasePrice": 320,
     "rentalPricePerDay": 13,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "formal",
     "sizes": [
       "Único"
@@ -727,7 +727,7 @@
     "price": 390,
     "fullPurchasePrice": 390,
     "rentalPricePerDay": 16,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "Único"
@@ -782,7 +782,7 @@
     "price": 420,
     "fullPurchasePrice": 420,
     "rentalPricePerDay": 17,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "formal",
     "sizes": [
       "Único"
@@ -837,7 +837,7 @@
     "price": 450,
     "fullPurchasePrice": 450,
     "rentalPricePerDay": 18,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "Único"
@@ -892,7 +892,7 @@
     "price": 450,
     "fullPurchasePrice": 450,
     "rentalPricePerDay": 18,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "Único"
@@ -1002,7 +1002,7 @@
     "price": 520,
     "fullPurchasePrice": 520,
     "rentalPricePerDay": 21,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "praia",
     "sizes": [
       "Único"
@@ -1057,7 +1057,7 @@
     "price": 520,
     "fullPurchasePrice": 520,
     "rentalPricePerDay": 21,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "Único"
@@ -1167,7 +1167,7 @@
     "price": 590,
     "fullPurchasePrice": 590,
     "rentalPricePerDay": 24,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "Único"
@@ -1222,7 +1222,7 @@
     "price": 690,
     "fullPurchasePrice": 690,
     "rentalPricePerDay": 28,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "cidade",
     "sizes": [
       "Único"
@@ -1332,7 +1332,7 @@
     "price": 1800,
     "fullPurchasePrice": 1800,
     "rentalPricePerDay": 72,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "formal",
     "sizes": [
       "Único"
@@ -1442,7 +1442,7 @@
     "price": 2200,
     "fullPurchasePrice": 2200,
     "rentalPricePerDay": 88,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "cidade",
     "sizes": [
       "Único"
@@ -1497,7 +1497,7 @@
     "price": 2600,
     "fullPurchasePrice": 2600,
     "rentalPricePerDay": 104,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "Único"
@@ -1662,7 +1662,7 @@
     "price": 16,
     "fullPurchasePrice": 16,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "formal",
     "sizes": [
       "40",
@@ -1720,7 +1720,7 @@
     "price": 95,
     "fullPurchasePrice": 95,
     "rentalPricePerDay": 4,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "40",
@@ -1894,7 +1894,7 @@
     "price": 110,
     "fullPurchasePrice": 110,
     "rentalPricePerDay": 4,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "40",
@@ -1952,7 +1952,7 @@
     "price": 119,
     "fullPurchasePrice": 119,
     "rentalPricePerDay": 5,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "praia",
     "sizes": [
       "40",
@@ -2068,7 +2068,7 @@
     "price": 120,
     "fullPurchasePrice": 120,
     "rentalPricePerDay": 5,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "40",
@@ -2242,7 +2242,7 @@
     "price": 139,
     "fullPurchasePrice": 139,
     "rentalPricePerDay": 6,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "40",
@@ -2358,7 +2358,7 @@
     "price": 190,
     "fullPurchasePrice": 190,
     "rentalPricePerDay": 8,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "cidade",
     "sizes": [
       "40",
@@ -2474,7 +2474,7 @@
     "price": 420,
     "fullPurchasePrice": 420,
     "rentalPricePerDay": 17,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "formal",
     "sizes": [
       "40",
@@ -2764,7 +2764,7 @@
     "price": 1150,
     "fullPurchasePrice": 1150,
     "rentalPricePerDay": 46,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "40",
@@ -2822,7 +2822,7 @@
     "price": 15,
     "fullPurchasePrice": 15,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -2880,7 +2880,7 @@
     "price": 22,
     "fullPurchasePrice": 22,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -2938,7 +2938,7 @@
     "price": 65,
     "fullPurchasePrice": 65,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -3054,7 +3054,7 @@
     "price": 95,
     "fullPurchasePrice": 95,
     "rentalPricePerDay": 4,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -3228,7 +3228,7 @@
     "price": 290,
     "fullPurchasePrice": 290,
     "rentalPricePerDay": 12,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -3286,7 +3286,7 @@
     "price": 19,
     "fullPurchasePrice": 19,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -3344,7 +3344,7 @@
     "price": 29,
     "fullPurchasePrice": 29,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -3402,7 +3402,7 @@
     "price": 180,
     "fullPurchasePrice": 180,
     "rentalPricePerDay": 7,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -3460,7 +3460,7 @@
     "price": 240,
     "fullPurchasePrice": 240,
     "rentalPricePerDay": 10,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -3518,7 +3518,7 @@
     "price": 290,
     "fullPurchasePrice": 290,
     "rentalPricePerDay": 12,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -3576,7 +3576,7 @@
     "price": 6200,
     "fullPurchasePrice": 6200,
     "rentalPricePerDay": 248,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -3750,7 +3750,7 @@
     "price": 16800,
     "fullPurchasePrice": 16800,
     "rentalPricePerDay": 672,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -3866,7 +3866,7 @@
     "price": 7,
     "fullPurchasePrice": 7,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -3924,7 +3924,7 @@
     "price": 12,
     "fullPurchasePrice": 12,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -4040,7 +4040,7 @@
     "price": 18,
     "fullPurchasePrice": 18,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -4156,7 +4156,7 @@
     "price": 19,
     "fullPurchasePrice": 19,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -4272,7 +4272,7 @@
     "price": 29,
     "fullPurchasePrice": 29,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -4330,7 +4330,7 @@
     "price": 29,
     "fullPurchasePrice": 29,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -4388,7 +4388,7 @@
     "price": 29,
     "fullPurchasePrice": 29,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -4504,7 +4504,7 @@
     "price": 39,
     "fullPurchasePrice": 39,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -4620,7 +4620,7 @@
     "price": 39,
     "fullPurchasePrice": 39,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -4678,7 +4678,7 @@
     "price": 45,
     "fullPurchasePrice": 45,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -4794,7 +4794,7 @@
     "price": 49,
     "fullPurchasePrice": 49,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -4852,7 +4852,7 @@
     "price": 49,
     "fullPurchasePrice": 49,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -4968,7 +4968,7 @@
     "price": 65,
     "fullPurchasePrice": 65,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -5026,7 +5026,7 @@
     "price": 65,
     "fullPurchasePrice": 65,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -5084,7 +5084,7 @@
     "price": 69,
     "fullPurchasePrice": 69,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -5200,7 +5200,7 @@
     "price": 75,
     "fullPurchasePrice": 75,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -5374,7 +5374,7 @@
     "price": 85,
     "fullPurchasePrice": 85,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -5432,7 +5432,7 @@
     "price": 89,
     "fullPurchasePrice": 89,
     "rentalPricePerDay": 4,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -5490,7 +5490,7 @@
     "price": 99,
     "fullPurchasePrice": 99,
     "rentalPricePerDay": 4,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -5548,7 +5548,7 @@
     "price": 99,
     "fullPurchasePrice": 99,
     "rentalPricePerDay": 4,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -5606,7 +5606,7 @@
     "price": 109,
     "fullPurchasePrice": 109,
     "rentalPricePerDay": 4,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -5664,7 +5664,7 @@
     "price": 110,
     "fullPurchasePrice": 110,
     "rentalPricePerDay": 4,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -5722,7 +5722,7 @@
     "price": 110,
     "fullPurchasePrice": 110,
     "rentalPricePerDay": 4,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -5780,7 +5780,7 @@
     "price": 115,
     "fullPurchasePrice": 115,
     "rentalPricePerDay": 5,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -5838,7 +5838,7 @@
     "price": 120,
     "fullPurchasePrice": 120,
     "rentalPricePerDay": 5,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -5896,7 +5896,7 @@
     "price": 129,
     "fullPurchasePrice": 129,
     "rentalPricePerDay": 5,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -5954,7 +5954,7 @@
     "price": 130,
     "fullPurchasePrice": 130,
     "rentalPricePerDay": 5,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -6012,7 +6012,7 @@
     "price": 150,
     "fullPurchasePrice": 150,
     "rentalPricePerDay": 6,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -6070,7 +6070,7 @@
     "price": 160,
     "fullPurchasePrice": 160,
     "rentalPricePerDay": 6,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -6186,7 +6186,7 @@
     "price": 190,
     "fullPurchasePrice": 190,
     "rentalPricePerDay": 8,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -6244,7 +6244,7 @@
     "price": 220,
     "fullPurchasePrice": 220,
     "rentalPricePerDay": 9,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -6360,7 +6360,7 @@
     "price": 340,
     "fullPurchasePrice": 340,
     "rentalPricePerDay": 14,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -6418,7 +6418,7 @@
     "price": 340,
     "fullPurchasePrice": 340,
     "rentalPricePerDay": 14,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -6534,7 +6534,7 @@
     "price": 480,
     "fullPurchasePrice": 480,
     "rentalPricePerDay": 19,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -6592,7 +6592,7 @@
     "price": 490,
     "fullPurchasePrice": 490,
     "rentalPricePerDay": 20,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -6650,7 +6650,7 @@
     "price": 590,
     "fullPurchasePrice": 590,
     "rentalPricePerDay": 24,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -6708,7 +6708,7 @@
     "price": 690,
     "fullPurchasePrice": 690,
     "rentalPricePerDay": 28,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -6766,7 +6766,7 @@
     "price": 950,
     "fullPurchasePrice": 950,
     "rentalPricePerDay": 38,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -6824,7 +6824,7 @@
     "price": 1150,
     "fullPurchasePrice": 1150,
     "rentalPricePerDay": 46,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -6940,7 +6940,7 @@
     "price": 2400,
     "fullPurchasePrice": 2400,
     "rentalPricePerDay": 96,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -6998,7 +6998,7 @@
     "price": 2800,
     "fullPurchasePrice": 2800,
     "rentalPricePerDay": 112,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -7056,7 +7056,7 @@
     "price": 3900,
     "fullPurchasePrice": 3900,
     "rentalPricePerDay": 156,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -7114,7 +7114,7 @@
     "price": 6,
     "fullPurchasePrice": 6,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -7230,7 +7230,7 @@
     "price": 10,
     "fullPurchasePrice": 10,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -7288,7 +7288,7 @@
     "price": 12,
     "fullPurchasePrice": 12,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -7346,7 +7346,7 @@
     "price": 14,
     "fullPurchasePrice": 14,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -7462,7 +7462,7 @@
     "price": 15,
     "fullPurchasePrice": 15,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "cidade",
     "sizes": [
       "S",
@@ -7636,7 +7636,7 @@
     "price": 35,
     "fullPurchasePrice": 35,
     "rentalPricePerDay": 3,
-    "gender": "unissex",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -7694,7 +7694,7 @@
     "price": 45,
     "fullPurchasePrice": 45,
     "rentalPricePerDay": 3,
-    "gender": "masculino",
+    "gender": "unissex",
     "occasion": "formal",
     "sizes": [
       "S",
@@ -7810,7 +7810,7 @@
     "price": 110,
     "fullPurchasePrice": 110,
     "rentalPricePerDay": 4,
-    "gender": "masculino",
+    "gender": "feminino",
     "occasion": "praia",
     "sizes": [
       "S",
@@ -7926,7 +7926,7 @@
     "price": 130,
     "fullPurchasePrice": 130,
     "rentalPricePerDay": 5,
-    "gender": "unissex",
+    "gender": "masculino",
     "occasion": "formal",
     "sizes": [
       "S",

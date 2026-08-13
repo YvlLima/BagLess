@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
-import { Heart, ShoppingBag, Sparkles, ArrowRight, Share2, CreditCard, ShieldCheck, ChevronRight } from 'lucide-react';
+import { Heart, ShoppingBag, Sparkles, ArrowRight, Share2, CreditCard, ShieldCheck, ChevronRight, UserCheck, Edit3, Crown } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { useWishlist } from '../context/WishlistContext';
 import { usePayment } from '../context/PaymentContext';
 import { PRODUCTS } from '../mockData/products';
-import { StyleQuizModal, useToast, ProductImagePlaceholder, PaymentMethodsModal } from '../components';
+import { StyleQuizModal, useToast, ProductImagePlaceholder, PaymentMethodsModal, EditProfileModal, VipPassportModal } from '../components';
+import { getVipDetails } from '../utils/vip';
 
 export const ProfileHistoryScreen = () => {
   const { user, favorites, addToKit, setCurrentScreen } = useApp();
+  const { wishlistLimit } = useWishlist();
   const { paymentMethods, getSelectedMethod } = usePayment();
   const { showToast } = useToast();
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [isVipModalOpen, setIsVipModalOpen] = useState(false);
+
+  const vipTier = user?.vipTier || 'global';
+  const vipDetails = getVipDetails(vipTier);
 
   const defaultMethod = getSelectedMethod();
   const favoriteProducts = PRODUCTS.filter((p) => favorites.includes(p.id));
+
+  const getInitials = (name) => {
+    if (!name) return 'BL';
+    const parts = name.trim().split(' ').filter(Boolean);
+    if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  };
 
   const pastTrips = [
     {
@@ -51,35 +66,58 @@ export const ProfileHistoryScreen = () => {
       <div className="bg-surface border border-light rounded-lg p-7 mb-6 shadow-sm">
         <div className="flex justify-between items-start flex-wrap gap-5">
           <div className="flex gap-5 items-center">
-            <div className="w-18 h-18 rounded-full bg-terracotta-light text-terracotta flex items-center justify-center font-extrabold text-2xl">
-              AS
+            <div className="w-18 h-18 rounded-full bg-terracotta-light text-terracotta flex items-center justify-center font-extrabold text-2xl border border-light">
+              {getInitials(user?.name)}
             </div>
 
             <div>
-              <div className="flex items-center gap-2">
-                <h1 className="heading-lg text-2xl">{user.name}</h1>
-                <span className="bg-olive-light text-olive font-bold text-xs py-0.5 px-2.5 rounded-full">
-                  Membro VIP Bagless Passport
-                </span>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="heading-lg text-2xl">{user?.name}</h1>
+                <button
+                  onClick={() => setIsVipModalOpen(true)}
+                  className="bg-olive-light text-olive font-bold text-xs py-0.5 px-2.5 rounded-full inline-flex items-center gap-1 border-none cursor-pointer"
+                  style={{ transition: 'transform 0.15s ease' }}
+                  title="Clica para ver as tuas vantagens VIP"
+                >
+                  <Crown size={12} color="var(--accent-olive)" /> {vipDetails.badge}
+                </button>
+                {user?.gender && (
+                  <span className={`badge-gender badge-gender-${user.gender}`} style={{ fontSize: '11px' }}>
+                    {user.gender === 'masculino' ? '👨 Masculino' : user.gender === 'feminino' ? '👩 Feminino' : '⚧ Unissex'}
+                  </span>
+                )}
               </div>
-              <div className="text-xs text-muted mt-0.5">{user.email}</div>
+              <div className="text-xs text-muted mt-0.5">{user?.email}</div>
 
               {/* Style DNA Badge */}
-              <div className="mt-2.5 flex items-center gap-2">
+              <div className="mt-2.5 flex items-center gap-2.5 flex-wrap">
                 <span className="bg-subtle border border-medium py-1 px-3 rounded-full text-xs font-bold text-terracotta inline-flex items-center gap-1.5">
-                  <Sparkles size={14} /> DNA de Estilo: {user.styleDNA || 'Resort & Beach Chic'}
+                  <Sparkles size={14} /> DNA de Estilo: {user?.styleDNA || 'Resort & Beach Chic'}
                 </span>
-                <button onClick={() => setIsQuizOpen(true)} className="text-xs text-muted underline border-none bg-none cursor-pointer">
+                <button
+                  onClick={() => setIsQuizOpen(true)}
+                  className="btn-secondary text-xs py-1 px-3"
+                  style={{ height: 'auto', fontSize: '11px' }}
+                >
                   Refazer Quiz AI
                 </button>
               </div>
             </div>
           </div>
 
-          <div className="text-right text-xs">
-            <div className="font-bold">Tamanhos Registados:</div>
-            <div className="text-muted">
-              Roupa: <strong>{user.sizes.top}</strong> • Calçado: <strong>{user.sizes.shoes}</strong>
+          <div className="flex flex-col items-end gap-3">
+            <button
+              onClick={() => setIsEditProfileOpen(true)}
+              className="btn-primary text-xs py-2 px-3.5 inline-flex items-center gap-1.5"
+            >
+              <Edit3 size={14} /> Editar Perfil
+            </button>
+
+            <div className="text-right text-xs">
+              <div className="font-bold text-muted uppercase text-xs" style={{ letterSpacing: '0.05em' }}>Tamanhos Registados</div>
+              <div className="text-main mt-1" style={{ fontSize: '13px' }}>
+                Roupa: <strong>{user?.sizes?.top || 'M'}</strong> • Calçado: <strong>{user?.sizes?.shoes || '39'}</strong>
+              </div>
             </div>
           </div>
         </div>
@@ -125,9 +163,11 @@ export const ProfileHistoryScreen = () => {
         <div className="flex justify-between items-center mb-4">
           <div>
             <h2 className="heading-lg text-xl flex items-center gap-2">
-              <Heart size={20} color="var(--primary-terracotta)" fill="var(--primary-terracotta)" /> A tua Lista de Favoritos ({favoriteProducts.length})
+              <Heart size={20} color="var(--primary-terracotta)" fill="var(--primary-terracotta)" /> A tua Lista de Favoritos ({favoriteProducts.length} / {wishlistLimit === Infinity ? '∞' : wishlistLimit})
             </h2>
-            <p className="subheading text-xs">Peças guardadas para as tuas próximas viagens.</p>
+            <p className="subheading text-xs">
+              Peças guardadas para as tuas próximas viagens ({vipDetails.name}).
+            </p>
           </div>
 
           {favoriteProducts.length > 0 && (
@@ -203,6 +243,8 @@ export const ProfileHistoryScreen = () => {
       {/* Modals */}
       <StyleQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
       <PaymentMethodsModal isOpen={isPaymentModalOpen} onClose={() => setIsPaymentModalOpen(false)} />
+      <EditProfileModal isOpen={isEditProfileOpen} onClose={() => setIsEditProfileOpen(false)} />
+      <VipPassportModal isOpen={isVipModalOpen} onClose={() => setIsVipModalOpen(false)} />
     </div>
   );
 };

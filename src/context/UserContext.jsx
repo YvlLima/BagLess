@@ -6,6 +6,8 @@ const UserContext = createContext();
 const defaultUserData = {
   name: 'Ana & Tiago Silva',
   email: 'ana.silva@bagless.travel',
+  vipTier: 'global',
+  vipTierName: 'VIP Global Passport',
   sizes: {
     top: 'M',
     bottom: '38',

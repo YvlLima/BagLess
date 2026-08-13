@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState } from 'react';
 import { usePersistentState } from '../utils/usePersistentState';
 import { DESTINATIONS } from '../mockData/destinations';
+import { useUser } from './UserContext';
+import { getVipDetails } from '../utils/vip';
 
 const RentalContext = createContext();
 
@@ -18,6 +20,7 @@ export const RentalProvider = ({
   const [activeRentals, setActiveRentals] = usePersistentState('bagless_active_rentals', []);
   const [boughtItems, setBoughtItems] = usePersistentState('bagless_bought_items', []);
   const [buyingProduct, setBuyingProduct] = useState(null);
+  const { user } = useUser();
 
   const removeFromActiveRentals = (itemId, size) => {
     setActiveRentals((prev) =>
@@ -27,14 +30,19 @@ export const RentalProvider = ({
 
   const executeBuyItem = (item, destinationHomeAddress) => {
     const rentalPaid = item.rentalPricePerDay * item.rentalDays;
-    const priceDiff = Math.max(0, item.fullPurchasePrice - rentalPaid);
+    const rawPriceDiff = Math.max(0, item.fullPurchasePrice - rentalPaid);
+    
+    const vip = getVipDetails(user?.vipTier);
+    const vipDiscountPercent = vip.purchaseDiscountPercent || 0;
+    const finalAmountPaid = Math.round(rawPriceDiff * (1 - vipDiscountPercent / 100));
 
     const newBoughtRecord = {
       ...item,
       purchaseDate: new Date().toISOString().split('T')[0],
       shippingAddress: destinationHomeAddress || userHomeAddress,
-      amountPaid: priceDiff,
-      originalRentalPaid: rentalPaid
+      amountPaid: finalAmountPaid,
+      originalRentalPaid: rentalPaid,
+      vipDiscountApplied: vipDiscountPercent
     };
 
     setBoughtItems((prev) => [newBoughtRecord, ...prev]);

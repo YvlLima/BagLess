@@ -1,11 +1,17 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import { usePersistentState } from '../utils/usePersistentState';
 import { PRODUCTS } from '../mockData/products';
+import { useUser } from './UserContext';
+import { getVipDetails } from '../utils/vip';
 
 const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
   const [favorites, setFavorites] = usePersistentState('bagless_favorites', []);
+  const { user } = useUser();
+
+  const vip = getVipDetails(user?.vipTier);
+  const wishlistLimit = vip.wishlistLimit;
 
   const getId = (productOrId) =>
     typeof productOrId === 'object' && productOrId !== null ? productOrId.id : productOrId;
@@ -17,17 +23,29 @@ export const WishlistProvider = ({ children }) => {
   };
 
   const toggleWishlist = (productOrId) => {
-    if (productOrId === undefined || productOrId === null) return;
+    if (productOrId === undefined || productOrId === null) return false;
     const id = getId(productOrId);
-    setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
-    );
+
+    if (favorites.includes(id)) {
+      setFavorites((prev) => prev.filter((favId) => favId !== id));
+      return 'removed';
+    } else {
+      if (favorites.length >= wishlistLimit) {
+        return 'limit_reached';
+      }
+      setFavorites((prev) => [...prev, id]);
+      return 'added';
+    }
   };
 
   const addToWishlist = (productOrId) => {
-    if (productOrId === undefined || productOrId === null) return;
+    if (productOrId === undefined || productOrId === null) return false;
     const id = getId(productOrId);
-    setFavorites((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    if (favorites.includes(id)) return 'exists';
+    if (favorites.length >= wishlistLimit) return 'limit_reached';
+
+    setFavorites((prev) => [...prev, id]);
+    return 'added';
   };
 
   const removeFromWishlist = (productOrId) => {
@@ -51,6 +69,7 @@ export const WishlistProvider = ({ children }) => {
         favorites,
         setFavorites,
         wishlist,
+        wishlistLimit,
         toggleWishlist,
         toggleFavorite: toggleWishlist,
         isInWishlist,
