@@ -130,35 +130,77 @@ export const DESTINATIONS = POPULAR_DESTINATIONS;
 export const fetchGlobalGeoLocation = async (query) => {
   if (!query || query.trim().length < 2) return [];
 
+  const cleanQuery = query.trim().toLowerCase();
+
+  const LOCAL_CITIES = [
+    { name: 'Felgueiras', country: 'Portugal', flag: '🇵🇹', lat: 41.3667, lon: -8.2000 },
+    { name: 'Porto', country: 'Portugal', flag: '🇵🇹', lat: 41.1579, lon: -8.6291 },
+    { name: 'Lisboa', country: 'Portugal', flag: '🇵🇹', lat: 38.7223, lon: -9.1393 },
+    { name: 'Braga', country: 'Portugal', flag: '🇵🇹', lat: 41.5454, lon: -8.4265 },
+    { name: 'Guimarães', country: 'Portugal', flag: '🇵🇹', lat: 41.4425, lon: -8.2918 },
+    { name: 'Faro (Algarve)', country: 'Portugal', flag: '🇵🇹', lat: 37.0194, lon: -7.9304 },
+    { name: 'Coimbra', country: 'Portugal', flag: '🇵🇹', lat: 40.2033, lon: -8.4103 },
+    { name: 'Funchal (Madeira)', country: 'Portugal', flag: '🇵🇹', lat: 32.6669, lon: -16.9241 },
+    { name: 'Ponta Delgada (Açores)', country: 'Portugal', flag: '🇵🇹', lat: 37.7412, lon: -25.6756 },
+    { name: 'Madrid', country: 'Espanha', flag: '🇪🇸', lat: 40.4168, lon: -3.7038 },
+    { name: 'Barcelona', country: 'Espanha', flag: '🇪🇸', lat: 41.3879, lon: 2.1699 },
+    { name: 'Londres', country: 'Reino Unido', flag: '🇬🇧', lat: 51.5074, lon: -0.1278 },
+    { name: 'Paris', country: 'França', flag: '🇫🇷', lat: 48.8566, lon: 2.3522 },
+    { name: 'Roma', country: 'Itália', flag: '🇮🇹', lat: 41.9028, lon: 12.4964 },
+    { name: 'Amesterdão', country: 'Países Baixos', flag: '🇳🇱', lat: 52.3676, lon: 4.9041 },
+    { name: 'Berlim', country: 'Alemanha', flag: '🇩🇪', lat: 52.5200, lon: 13.4050 },
+    { name: 'Tóquio', country: 'Japão', flag: '🇯🇵', lat: 35.6762, lon: 139.6503 },
+    { name: 'Nova Iorque', country: 'Estados Unidos', flag: '🇺🇸', lat: 40.7128, lon: -74.0060 },
+    { name: 'Dubai', country: 'Emirados Árabes Unidos', flag: '🇦🇪', lat: 25.2048, lon: 55.2708 },
+    { name: 'Bali', country: 'Indonésia', flag: '🇮🇩', lat: -8.4095, lon: 115.1889 }
+  ];
+
+  const localMatches = LOCAL_CITIES.filter(
+    (c) => c.name.toLowerCase().includes(cleanQuery) || c.country.toLowerCase().includes(cleanQuery)
+  ).map((c) => ({
+    id: `local-${c.name.toLowerCase().replace(/\s+/g, '-')}`,
+    displayName: `${c.name}, ${c.country}`,
+    city: c.name,
+    country: c.country,
+    flag: c.flag,
+    lat: c.lat,
+    lon: c.lon
+  }));
+
   try {
     const response = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`,
-      {
-        headers: {
-          'User-Agent': 'BaglessApp/1.0 (travel@bagless.app)'
-        }
-      }
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`
     );
 
-    if (!response.ok) return [];
+    if (response.ok) {
+      const data = await response.json();
+      const remoteResults = data.map((item) => {
+        const city = item.address.city || item.address.town || item.address.village || item.address.municipality || item.address.county || item.display_name.split(',')[0];
+        const country = item.address.country || '';
+        return {
+          id: `geo-${item.place_id}`,
+          displayName: `${city}${country ? `, ${country}` : ''}`,
+          city,
+          country,
+          flag: '🌍',
+          lat: parseFloat(item.lat),
+          lon: parseFloat(item.lon)
+        };
+      });
 
-    const data = await response.json();
-    return data.map((item) => {
-      const city = item.address.city || item.address.town || item.address.village || item.address.state || item.display_name.split(',')[0];
-      const country = item.address.country || '';
-      return {
-        id: `geo-${item.place_id}`,
-        displayName: `${city}${country ? `, ${country}` : ''}`,
-        city,
-        country,
-        lat: parseFloat(item.lat),
-        lon: parseFloat(item.lon)
-      };
-    });
+      const combined = [...localMatches];
+      remoteResults.forEach((r) => {
+        if (!combined.some((c) => c.displayName.toLowerCase() === r.displayName.toLowerCase())) {
+          combined.push(r);
+        }
+      });
+      return combined;
+    }
   } catch (err) {
     console.warn('Geocoding search warning:', err);
-    return [];
   }
+
+  return localMatches;
 };
 
 /**
