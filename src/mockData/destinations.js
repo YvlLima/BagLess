@@ -9,6 +9,7 @@ export const POPULAR_DESTINATIONS = [
     id: 'thailand-phuket',
     name: 'Phuket & Banguecoque',
     country: 'Tailândia',
+    countryCode: 'TH',
     flag: '🇹🇭',
     region: 'Ásia',
     lat: 7.8804,
@@ -20,13 +21,14 @@ export const POPULAR_DESTINATIONS = [
       recommendedFabric: 'Linho leve, Algodão orgânico & Poliamida de secagem rápida',
       suggestedOccasions: ['praia', 'cidade', 'desporto']
     },
-    coverImage: 'https://images.unsplash.com/photo-1506665531195-3566fe294710?auto=format&fit=crop&w=800&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80',
     description: 'Ilhas paradisíacas, templos e noites quentes tropicais.'
   },
   {
     id: 'amalfi-coast',
     name: 'Costa Amalfitana & Positano',
     country: 'Itália',
+    countryCode: 'IT',
     flag: '🇮🇹',
     region: 'Europa',
     lat: 40.634,
@@ -45,6 +47,7 @@ export const POPULAR_DESTINATIONS = [
     id: 'tokyo-japan',
     name: 'Tóquio & Quioto',
     country: 'Japão',
+    countryCode: 'JP',
     flag: '🇯🇵',
     region: 'Ásia',
     lat: 35.6762,
@@ -63,6 +66,7 @@ export const POPULAR_DESTINATIONS = [
     id: 'swiss-alps',
     name: 'Zermatt & St. Moritz (Alpes)',
     country: 'Suíça',
+    countryCode: 'CH',
     flag: '🇨🇭',
     region: 'Europa',
     lat: 45.9765,
@@ -74,13 +78,14 @@ export const POPULAR_DESTINATIONS = [
       recommendedFabric: 'Lã Merino, casacos térmicos impermeáveis (Puffer) e botas de neve',
       suggestedOccasions: ['desporto', 'formal', 'cidade']
     },
-    coverImage: 'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=800&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=800&q=80',
     description: 'Neve deslumbrante, chalés acolhedores e passeios nas montanhas.'
   },
   {
     id: 'new-york',
     name: 'Nova Iorque (Manhattan)',
     country: 'Estados Unidos',
+    countryCode: 'US',
     flag: '🇺🇸',
     region: 'América do Norte',
     lat: 40.7128,
@@ -99,6 +104,7 @@ export const POPULAR_DESTINATIONS = [
     id: 'paris-france',
     name: 'Paris & Riviera Francesa',
     country: 'França',
+    countryCode: 'FR',
     flag: '🇫🇷',
     region: 'Europa',
     lat: 48.8566,
